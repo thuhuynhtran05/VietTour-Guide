@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Phân công hướng dẫn viên | VietTour Guide</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --primary-light: #dbeafe;
+      --success: #10b981;
+      --success-hover: #059669;
+      --error: #ef4444;
+      --text-dark: #1e293b;
+      --text-medium: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --white: #ffffff;
+      --bg-light: #f8fafc;
+      --bg-gray: #f1f5f9;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background-color: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--text-dark);
+    }
+
+    .logo-icon {
+      width: 2rem;
+      height: 2rem;
+      color: var(--primary);
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .nav {
+      display: flex;
+      gap: 0.25rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-medium);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      padding: 0.625rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover {
+      background-color: var(--bg-gray);
+      color: var(--text-dark);
+    }
+
+    .nav-link.active {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-left: 1rem;
+      padding-left: 1rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .admin-badge {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .user-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    /* Main */
+    main {
+      padding: 2.5rem 1rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 0;
+    }
+
+    .page-icon {
+      width: 4rem;
+      height: 4rem;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(135deg, var(--success) 0%, var(--success-hover) 100%);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .page-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      color: var(--text-dark);
+    }
+
+    .page-description {
+      font-size: 1.0625rem;
+      color: var(--text-medium);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Form Card */
+    .form-card {
+      background: var(--white);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.02) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-left: 4px solid var(--success);
+      border-radius: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .info-box svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: var(--success);
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+    }
+
+    .info-box-content {
+      font-size: 0.9375rem;
+      color: var(--text-medium);
+      line-height: 1.6;
+    }
+
+    .info-box-title {
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.375rem;
+      font-size: 1.0625rem;
+    }
+
+    /* Form */
+    .form-grid {
+      display: grid;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .form-label {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    .required {
+      color: var(--error);
+      font-size: 1.125rem;
+    }
+
+    .form-select {
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 0.75rem;
+      font-size: 0.9375rem;
+      transition: all 0.2s;
+      background-color: var(--white);
+      font-family: inherit;
+      color: var(--text-dark);
+      cursor: pointer;
+    }
+
+    .form-select:hover {
+      border-color: var(--text-medium);
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: var(--success);
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+    }
+
+    .form-select:not([multiple]) {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+      background-position: right 0.75rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+      padding-right: 3rem;
+      appearance: none;
+    }
+
+    .form-select[multiple] {
+      min-height: 240px;
+      padding: 0.75rem;
+    }
+
+    .form-select option {
+      padding: 0.75rem;
+      border-radius: 0.375rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .form-select option:checked {
+      background: linear-gradient(135deg, var(--success) 0%, var(--success-hover) 100%);
+      color: white;
+    }
+
+    .helper-text {
+      font-size: 0.875rem;
+      color: var(--text-medium);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      line-height: 1.5;
+      background: var(--bg-light);
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .helper-text svg {
+      width: 1.125rem;
+      height: 1.125rem;
+      flex-shrink: 0;
+      color: var(--success);
+      margin-top: 0.125rem;
+    }
+
+    .helper-text strong {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    /* Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      gap: 0.75rem;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, var(--success) 0%, var(--success-hover) 100%);
+      color: white;
+    }
+
+    .btn-success:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-success:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .spinner {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Alert */
+    .alert {
+      padding: 1.25rem 1.5rem;
+      border-radius: 0.75rem;
+      margin-top: 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .alert-success {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
+      border: 2px solid rgba(16, 185, 129, 0.3);
+      color: #065f46;
+    }
+
+    .alert-error {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+      border: 2px solid rgba(239, 68, 68, 0.3);
+      color: #991b1b;
+    }
+
+    .alert svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.02) 100%);
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-medium);
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+      }
+
+      .page-title {
+        font-size: 1.875rem;
+      }
+
+      .form-card {
+        padding: 1.75rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span class="logo-text">VietTour Guide</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Trang chủ</a>
+        <a href="locations.html" class="nav-link">Địa điểm</a>
+        <a href="guides.html" class="nav-link">Hướng dẫn viên</a>
+        <a href="admin.html" class="nav-link">Dashboard</a>
+        <a href="admin-upload.html" class="nav-link">Tạo địa điểm</a>
+        <a href="admin-assign-guides.html" class="nav-link active">Phân công HDV</a>
+        <a href="admin-approve.html" class="nav-link">Duyệt HDV</a>
+        <div class="user-info">
+          <span class="admin-badge">ADMIN</span>
+          <span class="user-name" id="userName">Admin</span>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Main -->
+<main>
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+    </div>
+    <h1 class="page-title">Phân công hướng dẫn viên</h1>
+    <p class="page-description">Gán hướng dẫn viên vào các địa điểm du lịch để khách hàng có thể đặt tour</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card">
+      <div class="stat-value" id="totalLocations">-</div>
+      <div class="stat-label">Địa điểm</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="totalGuides">-</div>
+      <div class="stat-label">Hướng dẫn viên</div>
+    </div>
+  </div>
+
+  <!-- Form Card -->
+  <div class="form-card">
+    <div class="info-box">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 16v-4"></path>
+        <path d="M12 8h.01"></path>
+      </svg>
+      <div class="info-box-content">
+        <div class="info-box-title">Gán hướng dẫn viên vào địa điểm</div>
+        Chọn địa điểm và các hướng dẫn viên phù hợp. Hệ thống sẽ cập nhật danh sách hướng dẫn viên cho địa điểm đó, giúp khách hàng dễ dàng tìm kiếm và đặt tour.
+      </div>
+    </div>
+
+    <form id="assignForm">
+      <div class="form-grid">
+        <!-- Location Select -->
+        <div class="form-group">
+          <label class="form-label" for="selLocation">
+            Địa điểm tour <span class="required">*</span>
+          </label>
+          <select id="selLocation" class="form-select" required>
+            <option value="">Đang tải danh sách...</option>
+          </select>
+        </div>
+
+        <!-- Guides Multi-Select -->
+        <div class="form-group">
+          <label class="form-label" for="selGuides">
+            Hướng dẫn viên <span class="required">*</span>
+          </label>
+          <select id="selGuides" class="form-select" multiple required>
+            <option>Đang tải danh sách...</option>
+          </select>
+          <div class="helper-text">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 16v-4"></path>
+              <path d="M12 8h.01"></path>
+            </svg>
+            <span>Giữ <strong>Ctrl</strong> (Windows) hoặc <strong>Cmd</strong> (Mac) để chọn nhiều hướng dẫn viên cùng lúc</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" id="submitBtn" class="btn btn-success">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        Gán hướng dẫn viên vào địa điểm
+      </button>
+
+      <!-- Message -->
+      <div id="message"></div>
+    </form>
+  </div>
+</main>
+
+<script>
+  const API_BASE = 'http://localhost:4000/api';
+
+  // ============= AUTH CHECK =============
+  const token = localStorage.getItem('token');
+  const userRole = localStorage.getItem('userRole');
+  const userName = localStorage.getItem('userName');
+
+  if (!token) {
+    alert('Vui lòng đăng nhập');
+    window.location.href = 'login.html';
+  }
+
+  if (userRole !== 'admin') {
+    alert('Chỉ admin mới có quyền truy cập trang này');
+    window.location.href = 'index.html';
+  }
+
+  if (userName) {
+    document.getElementById('userName').textContent = userName;
+  }
+
+  // ============= LOAD LOCATIONS =============
+  async function loadLocations() {
+    const select = document.getElementById('selLocation');
+
+    try {
+      const res = await fetch(`${API_BASE}/locations`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!res.ok) {
+        throw new Error('Không thể tải danh sách địa điểm');
+      }
+
+      const data = await res.json();
+      console.log('📍 Locations API response:', data);
+
+      const locations = data.locations || data.data || data || [];
+      console.log('📍 Total locations:', locations.length);
+
+      if (locations.length > 0) {
+        select.innerHTML = '<option value="">-- Chọn địa điểm --</option>' +
+                locations.map(loc =>
+                        `<option value="${loc._id}">${loc.name} (${loc.price?.toLocaleString('vi-VN') || 'N/A'} VNĐ)</option>`
+                ).join('');
+
+        document.getElementById('totalLocations').textContent = locations.length;
+      } else {
+        select.innerHTML = '<option value="">Không có địa điểm nào</option>';
+        document.getElementById('totalLocations').textContent = '0';
+      }
+    } catch (error) {
+      console.error('❌ Error loading locations:', error);
+      select.innerHTML = '<option value="">Lỗi tải danh sách</option>';
+      document.getElementById('totalLocations').textContent = '0';
+    }
+  }
+
+  // ============= LOAD GUIDES - FIXED =============
+  async function loadGuides() {
+    const select = document.getElementById('selGuides');
+
+    try {
+      // ✅ GỌI ĐÚNG ENDPOINT /api/guides/approved
+      const res = await fetch(`${API_BASE}/guides/approved`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!res.ok) {
+        throw new Error('Không thể tải danh sách hướng dẫn viên');
+      }
+
+      const data = await res.json();
+      console.log('👨‍🏫 Guides API response:', data);
+
+      const guides = data.guides || data.data || data || [];
+      console.log('👨‍🏫 Total guides (approved):', guides.length);
+
+      if (guides.length > 0) {
+        // ✅ ƯU TIÊN guide.id (= User._id) thay vì guide._id
+        select.innerHTML = guides.map(guide => {
+          const userId = guide.id || guide._id;  // guide.id đã được map từ backend
+          const name = guide.name || 'N/A';
+          const email = guide.email || '';
+          const languages = guide.languages || [];
+
+          console.log(`👤 Guide: ${name} | User ID: ${userId}`);
+
+          return `<option value="${userId}">${name}${email ? ' (' + email + ')' : ''} - ${languages.join(', ') || 'N/A'}</option>`;
+        }).join('');
+
+        document.getElementById('totalGuides').textContent = guides.length;
+      } else {
+        select.innerHTML = '<option disabled>Chưa có hướng dẫn viên được duyệt</option>';
+        document.getElementById('totalGuides').textContent = '0';
+      }
+    } catch (error) {
+      console.error('❌ Error loading guides:', error);
+      select.innerHTML = '<option disabled>Lỗi tải danh sách</option>';
+      document.getElementById('totalGuides').textContent = '0';
+    }
+  }
+
+  // ============= FORM SUBMIT =============
+  document.getElementById('assignForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const locationId = document.getElementById('selLocation').value;
+    const guideSelect = document.getElementById('selGuides');
+    const selectedGuides = Array.from(guideSelect.selectedOptions).map(opt => opt.value);
+
+    console.log('📤 Location ID:', locationId);
+    console.log('📤 Selected User IDs:', selectedGuides);
+
+    if (!locationId) {
+      showMessage('Vui lòng chọn địa điểm', 'error');
+      return;
+    }
+
+    if (selectedGuides.length === 0) {
+      showMessage('Vui lòng chọn ít nhất 1 hướng dẫn viên', 'error');
+      return;
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <svg class="spinner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="2" x2="12" y2="6"></line>
+        <line x1="12" y1="18" x2="12" y2="22"></line>
+        <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+        <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+        <line x1="2" y1="12" x2="6" y2="12"></line>
+        <line x1="18" y1="12" x2="22" y2="12"></line>
+        <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+        <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+      </svg>
+      Đang gán...
+    `;
+
+    try {
+      const res = await fetch(`${API_BASE}/locations/${locationId}/guides`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ guides: selectedGuides })
+      });
+
+      const data = await res.json();
+      console.log('📥 Response:', data);
+
+      if (res.ok) {
+        showMessage(`✅ Đã gán ${selectedGuides.length} hướng dẫn viên vào địa điểm thành công!`, 'success');
+        document.getElementById('assignForm').reset();
+      } else {
+        showMessage(data.message || 'Có lỗi xảy ra khi gán hướng dẫn viên', 'error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      showMessage('Không thể kết nối tới server', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        Gán hướng dẫn viên vào địa điểm
+      `;
+    }
+  });
+  // ============= SHOW MESSAGE =============
+  function showMessage(message, type = 'success') {
+    const msgDiv = document.getElementById('message');
+    const icon = type === 'success'
+            ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>`
+            : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+        </svg>`;
+
+    msgDiv.innerHTML = `
+      <div class="alert alert-${type}">
+        ${icon}
+        <span>${message}</span>
+      </div>
+    `;
+
+    // Auto hide
+    setTimeout(() => {
+      msgDiv.innerHTML = '';
+    }, 5000);
+  }
+
+  // ============= INIT =============
+  loadLocations();
+  loadGuides();
+</script>
+</body>
+</html>

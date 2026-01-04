@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết địa điểm | VietTour Guide</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    :root {
+      --primary: #FFC107;
+      --primary-hover: #FFB300;
+      --primary-light: #fffbf0;
+      --success: #10b981;
+      --error: #ef4444;
+      --text-dark: #1f2937;
+      --text-medium: #4b5563;
+      --text-light: #6b7280;
+      --border: #e5e7eb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-image: url('./4.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text-dark);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(2px);
+      z-index: -1;
+    }
+
+    /* Header */
+    header {
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,193,7,0.3);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+      background: rgba(255,193,7,0.2);
+    }
+
+    /* Main Content */
+    main {
+      padding: 2.5rem 1rem;
+    }
+
+    .location-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      margin-bottom: 2rem;
+      font-size: 0.875rem;
+    }
+
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary-hover);
+    }
+
+    .location-detail {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 1.5rem;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,193,7,0.3);
+      overflow: hidden;
+    }
+
+    .location-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: #1a202c;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .location-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .location-category {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .location-content {
+      padding: 2rem;
+    }
+
+    /* Images */
+    .images-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .location-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .location-image:hover {
+      transform: scale(1.03);
+    }
+
+    .placeholder-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, var(--primary-light), #e5e7eb);
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 0.875rem;
+      border: 2px dashed var(--border);
+    }
+
+    /* Info Sections */
+    .info-section {
+      margin-bottom: 2rem;
+    }
+
+    .info-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-content {
+      background-color: var(--primary-light);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      border: 2px solid rgba(255,193,7,0.3);
+      line-height: 1.6;
+    }
+
+    .price-box {
+      background: linear-gradient(135deg, #fff9e6, #fffbf0);
+      border: 3px solid var(--primary);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .price-label {
+      font-size: 0.875rem;
+      color: var(--text-medium);
+      margin-bottom: 0.5rem;
+    }
+
+    .price-amount {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Guides Section */
+    .guides-section {
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border: 2px solid #0ea5e9;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .guides-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0c4a6e;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .guides-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .guide-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+      border: 2px solid transparent;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .guide-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(255,193,7,0.3);
+      border-color: var(--primary);
+    }
+
+    .guide-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 2rem;
+      color: white;
+      font-weight: 700;
+    }
+
+    .guide-name {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .guide-email {
+      font-size: 0.875rem;
+      color: var(--text-medium);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .guide-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .guide-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .info-icon {
+      color: var(--primary);
+      font-weight: 700;
+      min-width: 20px;
+    }
+
+    .info-text {
+      color: var(--text-medium);
+      line-height: 1.4;
+    }
+
+    .guide-languages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .language-tag {
+      background: linear-gradient(135deg, var(--primary-light), #fff);
+      color: var(--text-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,193,7,0.3);
+    }
+
+    .guide-cta {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: #1a202c;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      font-weight: 700;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .guide-card:hover .guide-cta {
+      transform: scale(1.05);
+    }
+
+    .empty-guides {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-medium);
+    }
+
+    .empty-guides svg {
+      width: 4rem;
+      height: 4rem;
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: white;
+      font-weight: 600;
+    }
+
+    .spinner {
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Error State */
+    .error-state {
+      text-align: center;
+      padding: 3rem;
+      background: rgba(255,255,255,0.95);
+      border-radius: 1.5rem;
+      color: var(--error);
+    }
+
+    @media (max-width: 768px) {
+      .location-title {
+        font-size: 1.5rem;
+      }
+
+      .guides-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        🗺️ VietTour Guide
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Trang chủ</a>
+        <a href="locations.html" class="nav-link">Địa điểm</a>
+        <a href="my-bookings.html" class="nav-link">Tour của tôi</a>
+        <span id="userName" style="color: white; font-weight: 600;">Khách hàng</span>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main>
+  <div class="location-container">
+    <div class="breadcrumb">
+      <a href="locations.html">← Quay về danh sách địa điểm</a>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="loading">
+      <span class="spinner">⏳</span>
+      Đang tải chi tiết địa điểm...
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="error-state" style="display: none;">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">❌</div>
+      <h3 id="errorTitle">Có lỗi xảy ra</h3>
+      <p id="errorDescription">Không thể tải thông tin địa điểm</p>
+    </div>
+
+    <!-- Location Detail -->
+    <div id="locationDetail" class="location-detail" style="display: none;">
+      <!-- Location Header -->
+      <div class="location-header">
+        <h1 class="location-title" id="locationName">Đang tải...</h1>
+        <div class="location-category" id="locationCategory">Chưa xác định</div>
+      </div>
+
+      <div class="location-content">
+        <!-- Images -->
+        <div class="images-grid" id="imagesContainer"></div>
+
+        <!-- Price -->
+        <div class="price-box">
+          <div class="price-label">Giá tour mỗi người</div>
+          <div class="price-amount" id="locationPrice">0 VND</div>
+        </div>
+
+        <!-- Description -->
+        <div class="info-section">
+          <h3 class="info-title">📝 Mô tả chi tiết</h3>
+          <div class="info-content" id="locationDescription">Đang tải...</div>
+        </div>
+
+        <!-- Guides List -->
+        <div class="guides-section">
+          <h2 class="guides-title">👨‍🏫 Hướng dẫn viên có sẵn</h2>
+          <div id="guidesContainer">
+            <div class="loading">
+              <span class="spinner">⏳</span>
+              Đang tải danh sách hướng dẫn viên...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  const API_BASE = 'http://localhost:4000/api';
+  const params = new URLSearchParams(window.location.search);
+  const locationId = params.get('id');
+  const userName = localStorage.getItem('userName');
+
+  if (userName) {
+    document.getElementById('userName').textContent = userName;
+  }
+
+  const loadingState = document.getElementById('loadingState');
+  const errorState = document.getElementById('errorState');
+  const locationDetail = document.getElementById('locationDetail');
+
+  let currentLocation = null;
+
+  function showError(title, description) {
+    loadingState.style.display = 'none';
+    locationDetail.style.display = 'none';
+    errorState.style.display = 'block';
+    document.getElementById('errorTitle').textContent = title;
+    document.getElementById('errorDescription').textContent = description;
+  }
+
+  function escapeHtml(text) {
+    return String(text)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+  }
+
+  function renderImages(images, name) {
+    const container = document.getElementById('imagesContainer');
+    if (!images || images.length === 0) {
+      container.innerHTML = '<div class="placeholder-image">Chưa có hình ảnh</div>';
+      return;
+    }
+
+    container.innerHTML = images.map(img => {
+      const url = img.startsWith('/') ? `http://localhost:4000${img}` : img;
+      return `<img src="${url}" class="location-image" alt="${escapeHtml(name)}">`;
+    }).join('');
+  }
+
+  // ============ RENDER GUIDE CARD ============
+  function renderGuideCard(guide) {
+    // ✅ Xử lý cả format cũ (guide.user.name) và mới (guide.name)
+    const name = guide.name || guide.user?.name || 'N/A';
+    const email = guide.email || guide.user?.email || 'N/A';
+    const languages = guide.languages || [];
+    const bio = guide.bio || 'Chưa có thông tin';
+
+    // Tạo avatar từ chữ cái đầu
+    const initial = name.charAt(0).toUpperCase();
+
+    return `
+      <a href="guide-detail.html?id=${guide._id}&locationId=${locationId}" class="guide-card">
+        <div class="guide-avatar">${initial}</div>
+        <div class="guide-name">${escapeHtml(name)}</div>
+        <div class="guide-email">${escapeHtml(email)}</div>
+        <div class="guide-info">
+          <div class="guide-info-item">
+            <span class="info-icon">🌍</span>
+            <div class="info-text">
+              <div class="guide-languages">
+                ${languages.map(lang =>
+            `<span class="language-tag">${escapeHtml(lang)}</span>`
+    ).join('')}
+              </div>
+            </div>
+          </div>
+          <div class="guide-info-item">
+            <span class="info-icon">📝</span>
+            <span class="info-text">${escapeHtml(bio)}</span>
+          </div>
+        </div>
+        <div class="guide-cta">Xem chi tiết & Đặt tour</div>
+      </a>
+    `;
+  }
+
+  // ============ RENDER GUIDES LIST ============
+  function renderGuides(guides) {
+    const container = document.getElementById('guidesContainer');
+
+    // ❌ Không có HDV
+    if (!guides || guides.length === 0) {
+      container.innerHTML = `
+      <div class="empty-guides">
+        <h3>Chưa có hướng dẫn viên</h3>
+        <p>Địa điểm này hiện chưa được gán HDV.</p>
+      </div>
+    `;
+      return;
+    }
+
+    // ✅ Có HDV
+    container.innerHTML = `
+    <div class="guides-grid">
+      ${guides.map(g => renderGuideCard(g)).join('')}
+    </div>
+  `;
+  }
+
+  // ============ LOAD LOCATION DETAILS ============
+  async function loadLocationDetails() {
+    if (!locationId) {
+      showError('Thiếu ID', 'Không tìm thấy ID địa điểm.');
+      return;
+    }
+
+    try {
+      console.log('🌐 FETCH URL =', `${API_BASE}/locations/${locationId}`);
+
+      const res = await fetch(`${API_BASE}/locations/${locationId}`);
+      if (!res.ok) throw new Error('Địa điểm không tồn tại');
+
+      const data = await res.json();
+      console.log('📦 location API =', data);
+
+      // ✅ Backend trả về { location: {...} }
+      currentLocation = data.location || data.data || data;
+
+      if (!currentLocation || !currentLocation.name) {
+        throw new Error('Dữ liệu địa điểm không hợp lệ');
+      }
+
+      // Update UI
+      document.getElementById('locationName').textContent = currentLocation.name;
+      document.getElementById('locationCategory').textContent = currentLocation.category || 'Chưa xác định';
+      document.getElementById('locationDescription').textContent = currentLocation.description || 'Chưa có mô tả';
+
+      // Set price
+      const price = currentLocation.price || 0;
+      document.getElementById('locationPrice').textContent =
+              price.toLocaleString('vi-VN') + ' VND';
+
+      // Render images
+      renderImages(currentLocation.images, currentLocation.name);
+
+      // ✅ Render guides (backend đã populate đầy đủ)
+      const guides = Array.isArray(currentLocation.guides)
+              ? currentLocation.guides
+              : [];
+
+      console.log('🧑‍🏫 GUIDES từ backend:', guides);
+
+      if (guides.length === 0) {
+        renderEmptyGuides(); // 👈 hàm hiện “Chưa có HDV”
+      } else {
+        renderGuides(guides);
+      }
+      function renderEmptyGuides() {
+        const container = document.getElementById('guidesContainer');
+
+        container.innerHTML = `
+    <div class="empty-guides">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">👨‍🏫</div>
+      <h3>Chưa có hướng dẫn viên</h3>
+      <p>Địa điểm này hiện chưa được gán hướng dẫn viên.</p>
+    </div>
+  `;
+      }
+
+
+      // Show content
+      loadingState.style.display = 'none';
+      errorState.style.display = 'none';
+      locationDetail.style.display = 'block';
+
+    } catch (err) {
+      console.error(err);
+      showError('Lỗi', err.message);
+    }
+  }
+
+  // Initialize
+  loadLocationDetails();
+</script>
+</body>
+</html>

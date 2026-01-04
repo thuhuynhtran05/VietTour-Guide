@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách hướng dẫn viên | VietTour Guide</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <style>
+        :root {
+            --white: #ffffff;
+            --bg-0: #0f172a;
+            --accent: #fbbf24;
+            --accent-hover: #f59e0b;
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --glass: rgba(255,255,255,0.08);
+            --glass-border: rgba(255,255,255,0.12);
+            --text-dark: #0b1220;
+            --text-light: rgba(255,255,255,0.95);
+            --text-muted: rgba(255,255,255,0.75);
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --shadow-sm: 0 4px 18px rgba(2,6,23,0.06);
+            --shadow-md: 0 10px 30px rgba(2,6,23,0.18);
+            --shadow-lg: 0 25px 50px -12px rgba(0,0,0,0.35);
+            --card-radius: 16px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            overflow-y: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url('./4.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(6px) saturate(0.9) brightness(0.45);
+            z-index: -3;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 10% 10%, rgba(255,193,7,0.06), transparent 10%),
+            radial-gradient(circle at 90% 90%, rgba(255,255,255,0.03), transparent 10%);
+            z-index: -2;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 40;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px) saturate(120%);
+            border-bottom: 1px solid rgba(16,24,40,0.06);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(255,193,7,0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 20px rgba(255,193,7,0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 12px 30px rgba(255,193,7,0.6); }
+        }
+
+        .logo-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: #1a202c;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #1f2937;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #475569;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            background: rgba(16,24,40,0.05);
+            color: var(--text-dark);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(37,99,235,0.08);
+            font-weight: 700;
+        }
+
+        .auth {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(16,24,40,0.12);
+            color: #475569;
+        }
+
+        .btn-outline:hover {
+            background: rgba(16,24,40,0.04);
+            border-color: rgba(16,24,40,0.18);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #111;
+            box-shadow: 0 4px 14px rgba(251,191,36,0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 6px 18px rgba(245,158,11,0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: var(--accent);
+            color: #111;
+            box-shadow: 0 4px 14px rgba(251,191,36,0.3);
+        }
+
+        .btn-danger:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 6px 18px rgba(245,158,11,0.4);
+            transform: translateY(-1px);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 12px;
+            background: rgba(37,99,235,0.08);
+            border-radius: 10px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 2px 8px rgba(37,99,235,0.3);
+        }
+
+        .role-badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .role-admin {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .role-guide {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .role-user {
+            background: rgba(37,99,235,0.12);
+            color: var(--primary);
+        }
+
+        main {
+            padding: 48px 0 80px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .guides-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.08);
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateX(-2px);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 32px;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-title {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .page-description {
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+
+        .filters {
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--card-radius);
+            padding: 24px;
+            margin-bottom: 32px;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
+            animation: fadeIn 0.6s ease 0.2s backwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .filter-select {
+            padding: 12px 16px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.06);
+            color: white;
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .filter-select option {
+            background: #1e293b;
+            color: white;
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .filter-button {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .filter-button.primary {
+            background: linear-gradient(135deg, var(--primary), #7c3aed);
+            color: white;
+            box-shadow: 0 6px 20px rgba(37,99,235,0.3);
+        }
+
+        .filter-button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37,99,235,0.4);
+        }
+
+        .filter-button.secondary {
+            background: rgba(255,255,255,0.08);
+            color: var(--text-light);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .filter-button.secondary:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .alert {
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-error {
+            background: rgba(239,68,68,0.12);
+            border: 1px solid rgba(239,68,68,0.2);
+            color: #fca5a5;
+        }
+
+        .alert-success {
+            background: rgba(16,185,129,0.15);
+            border: 1px solid rgba(16,185,129,0.25);
+            color: #6ee7b7;
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            animation: fadeIn 0.6s ease 0.4s backwards;
+        }
+
+        .guide-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .guide-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .guide-header {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            padding: 32px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .guide-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulseGlow 3s ease infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .guide-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 32px;
+            font-weight: 800;
+            border: 3px solid rgba(255,255,255,0.5);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+
+        .guide-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .guide-title {
+            font-size: 14px;
+            color: rgba(255,255,255,0.9);
+            position: relative;
+            z-index: 1;
+        }
+
+        .guide-content {
+            padding: 20px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .guide-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .info-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(251,191,36,0.15);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid rgba(251,191,36,0.3);
+            transition: var(--transition);
+        }
+
+        .tag:hover {
+            background: rgba(251,191,36,0.25);
+            transform: scale(1.05);
+        }
+
+        .guide-footer {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .rating-stars {
+            color: #fbbf24;
+            filter: drop-shadow(0 2px 4px rgba(251,191,36,0.3));
+        }
+
+        .view-profile {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: var(--transition);
+            background: rgba(37,99,235,0.1);
+            padding: 6px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .view-profile:hover {
+            background: rgba(37,99,235,0.2);
+            transform: translateX(3px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--card-radius);
+            backdrop-filter: blur(20px);
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        .empty-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .empty-description {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 32px;
+            padding: 20px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--card-radius);
+            backdrop-filter: blur(20px);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                padding: 0 16px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .logo-text {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="header-inner">
+            <a class="logo" href="index.html">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                </div>
+                <span class="logo-text">VietTour Guide</span>
+            </a>
+
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Trang chủ</a>
+                <a href="locations.html" class="nav-link">Địa điểm</a>
+                <a href="guides.html" class="nav-link active">Hướng dẫn viên</a>
+                <a href="my-bookings.html" class="nav-link" id="myBookingsLink">Tour của tôi</a>
+            </nav>
+
+            <div class="auth" id="authButtons">
+                <!-- Will be filled by JavaScript -->
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="guides-container">
+        <div class="breadcrumb">
+            <a href="index.html" id="backLink">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Quay lại trang chủ
+            </a>
+        </div>
+
+        <div class="page-header">
+            <h1 class="page-title">Đội ngũ hướng dẫn viên</h1>
+            <p class="page-description" id="locationDescription">
+                Khám phá các hướng dẫn viên chuyên nghiệp của chúng tôi
+            </p>
+        </div>
+
+        <div class="stats-bar" id="statsBar" style="display: none;">
+            <div class="stat-item">
+                <span class="stat-value" id="totalGuides">0</span>
+                <span class="stat-label">Hướng dẫn viên</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="avgRating">0</span>
+                <span class="stat-label">Đánh giá TB</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="languagesCount">0</span>
+                <span class="stat-label">Ngôn ngữ</span>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label class="filter-label" for="languageFilter">Ngôn ngữ</label>
+                    <select class="filter-select" id="languageFilter">
+                        <option value="">Tất cả ngôn ngữ</option>
+                        <option value="english">Tiếng Anh</option>
+                        <option value="french">Tiếng Pháp</option>
+                        <option value="chinese">Tiếng Trung</option>
+                        <option value="japanese">Tiếng Nhật</option>
+                        <option value="korean">Tiếng Hàn</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label" for="ratingFilter">Đánh giá</label>
+                    <select class="filter-select" id="ratingFilter">
+                        <option value="">Tất cả đánh giá</option>
+                        <option value="4.5">4.5★ trở lên</option>
+                        <option value="4">4★ trở lên</option>
+                        <option value="3">3★ trở lên</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label" for="sortFilter">Sắp xếp</label>
+                    <select class="filter-select" id="sortFilter">
+                        <option value="rating">Đánh giá cao nhất</option>
+                        <option value="experience">Kinh nghiệm nhiều nhất</option>
+                        <option value="name">Tên A-Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button class="filter-button primary" id="applyFilters">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                    </svg>
+                    Áp dụng bộ lọc
+                </button>
+                <button class="filter-button secondary" id="resetFilters">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                        <path d="M21 3v5h-5"></path>
+                        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                        <path d="M3 21v-5h5"></path>
+                    </svg>
+                    Đặt lại
+                </button>
+            </div>
+        </div>
+
+        <div id="alertContainer"></div>
+
+        <div id="loadingState" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Đang tải danh sách hướng dẫn viên...</p>
+        </div>
+
+        <div id="guidesGrid" class="guides-grid"></div>
+
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <h3 class="empty-title">Không tìm thấy hướng dẫn viên</h3>
+            <p class="empty-description">
+                Không có hướng dẫn viên nào phù hợp với bộ lọc của bạn
+            </p>
+        </div>
+    </div>
+</main>
+
+<script>
+    let allGuides = [];
+    let filteredGuides = [];
+    let currentUser = null;
+
+    const params = new URLSearchParams(window.location.search);
+    const locationId = params.get('locationId');
+
+    const API_URL = window.location.hostname === 'localhost'
+        ? 'http://localhost:4000/api'
+        : '/api';
+
+    // ✅ Load user info from token
+    function loadUserInfo() {
+        const token = localStorage.getItem('token');
+        const authButtons = document.getElementById('authButtons');
+
+        if (token) {
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                currentUser = payload;
+
+                const userName = payload.name || payload.username || payload.email?.split('@')[0] || 'User';
+                const avatarText = userName.charAt(0).toUpperCase();
+                const roleClass = payload.role === 'admin' ? 'role-admin' : (payload.role === 'guide' ? 'role-guide' : 'role-user');
+                const roleText = payload.role === 'admin' ? 'ADMIN' : (payload.role === 'guide' ? 'GUIDE' : 'USER');
+
+                authButtons.innerHTML = `
+            <div class="user-info">
+              <div class="user-avatar">${avatarText}</div>
+              <span class="role-badge ${roleClass}">${roleText}</span>
+            </div>
+            <button class="btn btn-danger" onclick="logout()">Đăng xuất</button>
+          `;
+
+                if (payload.role === 'guide') {
+                    document.getElementById('myBookingsLink').href = 'guide-bookings.html';
+                    document.getElementById('myBookingsLink').textContent = 'Booking của tôi';
+                } else if (payload.role === 'admin') {
+                    document.getElementById('myBookingsLink').href = 'admin.html';
+                    document.getElementById('myBookingsLink').textContent = 'Quản lý Booking';
+                }
+
+            } catch (err) {
+                console.error('Invalid token:', err);
+                localStorage.removeItem('token');
+                showGuestButtons();
+            }
+        } else {
+            showGuestButtons();
+        }
+    }
+
+    function showGuestButtons() {
+        const authButtons = document.getElementById('authButtons');
+        authButtons.innerHTML = `
+        <a href="login.html" class="btn btn-outline">Đăng nhập</a>
+        <a href="register.html" class="btn btn-primary">Đăng ký</a>
+      `;
+    }
+
+    function logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
+        window.location.reload();
+    }
+
+    function showAlert(message, type = 'error') {
+        const container = document.getElementById('alertContainer');
+        const alertClass = type === 'success' ? 'alert-success' : 'alert-error';
+        const icon = type === 'success' ? '✓' : '⚠';
+
+        container.innerHTML = `
+        <div class="alert ${alertClass}">
+          ${icon} ${message}
+        </div>
+      `;
+
+        setTimeout(() => container.innerHTML = '', 4000);
+    }
+
+    function renderGuides(guides) {
+        const grid = document.getElementById('guidesGrid');
+        const emptyState = document.getElementById('emptyState');
+        const statsBar = document.getElementById('statsBar');
+
+        if (!guides || guides.length === 0) {
+            grid.innerHTML = '';
+            emptyState.style.display = 'block';
+            statsBar.style.display = 'none';
+            return;
+        }
+
+        emptyState.style.display = 'none';
+        statsBar.style.display = 'flex';
+
+        document.getElementById('totalGuides').textContent = guides.length;
+
+        const guidesWithRating = guides.filter(g => g.rating);
+        const avgRating = guidesWithRating.length > 0
+            ? (guidesWithRating.reduce((sum, g) => sum + g.rating, 0) / guidesWithRating.length).toFixed(1)
+            : '0';
+        document.getElementById('avgRating').textContent = avgRating + '★';
+
+        const allLanguages = new Set(guides.flatMap(g => g.languages || []));
+        document.getElementById('languagesCount').textContent = allLanguages.size;
+
+        grid.innerHTML = guides.map(guide => {
+            const guideId = guide._id || guide.id || guide.userId || guide.guideId;
+
+            console.log('Guide data:', {
+                name: guide.name,
+                _id: guide._id,
+                id: guide.id,
+                userId: guide.userId,
+                guideId: guide.guideId,
+                selectedId: guideId
+            });
+
+            const avatarText = guide.name ? guide.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase() : '??';
+            const rating = guide.rating || 0;
+            const reviews = guide.reviews || 0;
+            const experience = guide.experience || 0;
+            const tours = guide.tours || 0;
+            const location = guide.location || 'Chưa cập nhật';
+            const bio = guide.bio || 'Hướng dẫn viên chuyên nghiệp';
+            const languages = guide.languages || [];
+
+            return `
+          <div class="guide-card" onclick="window.location.href='guide-detail.html?id=${guideId}${locationId ? '&locationId=' + locationId : ''}'">
+            <div class="guide-header">
+              <div class="guide-avatar">${avatarText}</div>
+              <h3 class="guide-name">${guide.name}</h3>
+              <p class="guide-title">${bio.substring(0, 50)}${bio.length > 50 ? '...' : ''}</p>
+            </div>
+
+            <div class="guide-content">
+              <div class="guide-info">
+                <div class="info-row">
+                  <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <span>${location}</span>
+                </div>
+
+                ${experience > 0 ? `
+                <div class="info-row">
+                  <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  <span>${experience} năm kinh nghiệm</span>
+                </div>
+                ` : ''}
+
+                ${tours > 0 ? `
+                <div class="info-row">
+                  <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                  <span>${tours} tours đã dẫn</span>
+                </div>
+                ` : ''}
+              </div>
+
+              ${languages.length > 0 ? `
+                <div class="tags">
+                  ${languages.map(lang => `<span class="tag">${lang}</span>`).join('')}
+                </div>
+              ` : ''}
+            </div>
+
+            <div class="guide-footer">
+              <div class="rating">
+                <span class="rating-stars">★</span>
+                <span>${rating > 0 ? rating.toFixed(1) : 'N/A'}</span>
+                ${reviews > 0 ? `<span style="opacity: 0.6;">(${reviews})</span>` : ''}
+              </div>
+              <a href="guide-detail.html?id=${guideId}${locationId ? '&locationId=' + locationId : ''}" class="view-profile" onclick="event.stopPropagation()">
+                Xem hồ sơ →
+              </a>
+            </div>
+          </div>
+        `;
+        }).join('');
+    }
+
+    async function loadGuides() {
+        const loadingState = document.getElementById('loadingState');
+        const guidesGrid = document.getElementById('guidesGrid');
+
+        loadingState.style.display = 'flex';
+        guidesGrid.innerHTML = '';
+
+        try {
+            const response = await fetch(`${API_URL}/guides/approved`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+
+            console.log('📦 API Response:', data);
+            console.log('📊 Guides array:', data.guides);
+            if (data.guides && data.guides.length > 0) {
+                console.log('🎯 First guide:', data.guides[0]);
+            }
+
+            if (!data.success) {
+                throw new Error(data.message || 'Lỗi tải dữ liệu');
+            }
+
+            allGuides = data.guides || [];
+
+            if (locationId) {
+                filteredGuides = allGuides.filter(g =>
+                    g.location && g.location.toLowerCase().includes(locationId.toLowerCase())
+                );
+
+                document.getElementById('backLink').href = `locations.html`;
+                document.getElementById('locationDescription').textContent =
+                    `Hướng dẫn viên chuyên về ${locationId}`;
+            } else {
+                filteredGuides = [...allGuides];
+            }
+
+            loadingState.style.display = 'none';
+            renderGuides(filteredGuides);
+
+        } catch (error) {
+            console.error('Load guides error:', error);
+            loadingState.style.display = 'none';
+            showAlert(`Không thể tải danh sách hướng dẫn viên: ${error.message}`, 'error');
+            document.getElementById('emptyState').style.display = 'block';
+        }
+    }
+
+    function applyFilters() {
+        const language = document.getElementById('languageFilter').value.toLowerCase();
+        const minRating = parseFloat(document.getElementById('ratingFilter').value) || 0;
+        const sort = document.getElementById('sortFilter').value;
+
+        filteredGuides = allGuides.filter(guide => {
+            const matchLanguage = !language ||
+                guide.languages.some(l => l.toLowerCase().includes(language));
+            const matchRating = guide.rating >= minRating;
+
+            return matchLanguage && matchRating;
+        });
+
+        switch(sort) {
+            case 'rating':
+                filteredGuides.sort((a, b) => b.rating - a.rating);
+                break;
+            case 'experience':
+                filteredGuides.sort((a, b) => b.experience - a.experience);
+                break;
+            case 'name':
+                filteredGuides.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+        }
+
+        renderGuides(filteredGuides);
+        showAlert('Đã áp dụng bộ lọc thành công!', 'success');
+    }
+
+    function resetFilters() {
+        document.getElementById('languageFilter').value = '';
+        document.getElementById('ratingFilter').value = '';
+        document.getElementById('sortFilter').value = 'rating';
+
+        filteredGuides = [...allGuides];
+        renderGuides(filteredGuides);
+        showAlert('Đã đặt lại bộ lọc', 'success');
+    }
+
+    document.getElementById('applyFilters').addEventListener('click', applyFilters);
+    document.getElementById('resetFilters').addEventListener('click', resetFilters);
+
+    loadUserInfo();
+    loadGuides();
+</script>
+</body>
+</html>

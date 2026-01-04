@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Dashboard | VietTour Guide</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height:100vh;
+      background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80') center/cover no-repeat fixed;
+      color: #1f2937;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255,255,255,0.1);
+      z-index: -1;
+    }
+
+    header {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      gap: 2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .logo:hover { transform: scale(1.02); }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: #FFC107;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(255,193,7,0.3);
+    }
+
+    .logo-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: #1a202c;
+      stroke-width: 2.5;
+    }
+
+    .logo-text {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .nav {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-link {
+      color: #4b5563;
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      padding: 0.625rem 1rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .nav-link.active {
+      color: #3b82f6;
+      background: #eff6ff;
+    }
+
+    .nav-link:hover:not(.active) {
+      color: #1f2937;
+      background: #f3f4f6;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-left: 1.5rem;
+      border-left: 2px solid #e5e7eb;
+      flex-shrink: 0;
+    }
+
+    .admin-badge {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(245,158,11,0.3);
+    }
+
+    .user-name {
+      color: #1f2937;
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+
+    main {
+      padding: 3rem 1.5rem;
+    }
+
+    .admin-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: white;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .page-description {
+      font-size: 1.125rem;
+      opacity: 0.95;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: #6b7280;
+      font-size: 0.9375rem;
+      font-weight: 600;
+    }
+
+    .chart-container {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(245,158,11,0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(245,158,11,0.4);
+    }
+
+    .alert {
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      animation: slideIn 0.3s ease;
+      border: 1px solid;
+    }
+
+    .alert-success {
+      background: #d1fae5;
+      border-color: #10b981;
+      color: #065f46;
+    }
+
+    .alert-error {
+      background: #fee2e2;
+      border-color: #ef4444;
+      color: #991b1b;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .loading {
+      color: #9ca3af;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .page-title { font-size: 2rem; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-value { font-size: 2rem; }
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+      body::before { display: none; }
+      header { box-shadow: none; }
+      .nav-link, .user-info { display: none !important; }
+      .btn { display: none !important; }
+      .stat-card, .chart-container {
+        background: white;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        break-inside: avoid;
+      }
+      .stat-card::before { display: none; }
+      .page-header { color: #1f2937; text-shadow: none; }
+      .stat-value {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <span class="logo-text">VietTour Guide</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Trang chủ</a>
+        <a href="locations.html" class="nav-link">Địa điểm</a>
+        <a href="guides.html" class="nav-link">Hướng dẫn viên</a>
+        <a href="admin-upload.html" class="nav-link">Upload Tour</a>
+        <a href="admin-approve.html" class="nav-link">Duyệt HDV</a>
+        <a href="admin-assign-guides.html" class="nav-link active">Phân công HDV</a>
+      </nav>
+      <div class="user-info">
+        <span class="admin-badge">ADMIN</span>
+        <span class="user-name" id="userName">Admin</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="admin-container">
+    <div class="page-header">
+      <h1 class="page-title">Bảng điều khiển quản trị</h1>
+      <p class="page-description">Quản lý tour, địa điểm và hướng dẫn viên</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value loading" id="pendingCount">-</div>
+        <div class="stat-label">Hồ sơ chờ duyệt</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value loading" id="approvedCount">-</div>
+        <div class="stat-label">Đã duyệt</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value loading" id="locationCount">-</div>
+        <div class="stat-label">Địa điểm</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value loading" id="bookingCount">-</div>
+        <div class="stat-label">Tổng booking</div>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-header">
+        <h2 class="chart-title">Thống kê 7 ngày gần nhất</h2>
+        <button id="printBtn" class="btn">
+          🖨️ In báo cáo
+        </button>
+      </div>
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <div id="alertContainer"></div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const API_URL = 'http://localhost:4000/api';
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('userRole');
+  const userName = localStorage.getItem('userName');
+
+  // Auth check
+  if (!token || role !== 'admin') {
+    alert('Bạn cần đăng nhập với quyền Admin!');
+    window.location.href = 'login.html';
+  }
+
+  if (userName) {
+    document.getElementById('userName').textContent = userName;
+  }
+
+  // Print button
+  document.getElementById('printBtn').addEventListener('click', async () => {
+    // Đợi 500ms để đảm bảo data đã render xong
+    await new Promise(resolve => setTimeout(resolve, 500));
+    window.print();
+  });
+
+  // Show alert function
+  function showAlert(message, type = 'success') {
+    const alertContainer = document.getElementById('alertContainer');
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    const icon = type === 'success' ? '✅' : '❌';
+    alert.innerHTML = `<span>${icon}</span><span>${message}</span>`;
+    alertContainer.appendChild(alert);
+    setTimeout(() => alert.remove(), 5000);
+  }
+
+  // Load statistics
+  async function loadStats() {
+    try {
+      console.log('📊 Loading statistics...');
+
+      const res = await fetch(`${API_URL}/admin/statistics`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log('📊 Statistics data:', data);
+
+      if (data.success && data.statistics) {
+        const stats = data.statistics;
+
+        // Update UI
+        const pendingEl = document.getElementById('pendingCount');
+        pendingEl.textContent = stats.guides?.pending ?? 0;
+        pendingEl.classList.remove('loading');
+
+        const approvedEl = document.getElementById('approvedCount');
+        approvedEl.textContent = stats.guides?.approved ?? 0;
+        approvedEl.classList.remove('loading');
+
+        const locationEl = document.getElementById('locationCount');
+        locationEl.textContent = stats.locations?.total ?? 0;
+        locationEl.classList.remove('loading');
+
+        const bookingEl = document.getElementById('bookingCount');
+        bookingEl.textContent = stats.bookings?.total ?? 0;
+        bookingEl.classList.remove('loading');
+
+        console.log('✅ Statistics loaded successfully');
+      } else {
+        throw new Error('Invalid response format');
+      }
+    } catch (error) {
+      console.error('❌ Load stats error:', error);
+      showAlert('Lỗi khi tải thống kê: ' + error.message, 'error');
+
+      // Show error state
+      ['pendingCount', 'approvedCount', 'locationCount', 'bookingCount'].forEach(id => {
+        const el = document.getElementById(id);
+        el.textContent = '!';
+        el.classList.remove('loading');
+      });
+    }
+  }
+
+  // Load chart data
+  let chart = null;
+  async function loadChartData() {
+    try {
+      console.log('📈 Loading chart data...');
+
+      const res = await fetch(`${API_URL}/admin/chart`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log('📈 Chart data:', data);
+
+      if (!data.success || !data.chartData) {
+        throw new Error('Invalid chart data format');
+      }
+
+      const chartData = data.chartData;
+      const labels = chartData.map(d => {
+        const date = new Date(d.date);
+        return date.toLocaleDateString('vi-VN', {day: '2-digit', month: '2-digit'});
+      });
+      const moneyData = chartData.map(d => d.totalMoney || 0);
+      const bookingData = chartData.map(d => d.bookingCount || 0);
+
+      if (chart) chart.destroy();
+
+      const ctx = document.getElementById('myChart');
+      chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            {
+              type: 'bar',
+              label: 'Doanh thu (VNĐ)',
+              data: moneyData,
+              borderColor: '#3b82f6',
+              backgroundColor: 'rgba(59,130,246,0.2)',
+              borderWidth: 2,
+              borderRadius: 6,
+              yAxisID: 'y'
+            },
+            {
+              type: 'line',
+              label: 'Số lượng booking',
+              data: bookingData,
+              borderColor: '#8b5cf6',
+              backgroundColor: 'rgba(139,92,246,0.1)',
+              borderWidth: 3,
+              tension: 0.4,
+              pointRadius: 5,
+              pointHoverRadius: 7,
+              pointBackgroundColor: '#8b5cf6',
+              yAxisID: 'y1'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                color: '#4b5563',
+                font: { size: 13, weight: 600 },
+                padding: 15,
+                usePointStyle: true
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(255,255,255,0.95)',
+              titleColor: '#1f2937',
+              bodyColor: '#4b5563',
+              borderColor: '#e5e7eb',
+              borderWidth: 1,
+              padding: 12,
+              cornerRadius: 8,
+              callbacks: {
+                label: function(context) {
+                  let label = context.dataset.label || '';
+                  if (label) label += ': ';
+                  if (context.datasetIndex === 0) {
+                    label += new Intl.NumberFormat('vi-VN', {
+                      style: 'currency',
+                      currency: 'VND'
+                    }).format(context.raw);
+                  } else {
+                    label += context.raw;
+                  }
+                  return label;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              title: {
+                display: true,
+                text: 'Doanh thu (VNĐ)',
+                color: '#4b5563',
+                font: { size: 12, weight: 600 }
+              },
+              ticks: {
+                callback: value => new Intl.NumberFormat('vi-VN', {
+                  notation: 'compact',
+                  compactDisplay: 'short'
+                }).format(value),
+                color: '#6b7280'
+              },
+              grid: { color: '#f3f4f6' }
+            },
+            y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              title: {
+                display: true,
+                text: 'Số lượng booking',
+                color: '#4b5563',
+                font: { size: 12, weight: 600 }
+              },
+              grid: { drawOnChartArea: false },
+              ticks: { color: '#6b7280' }
+            },
+            x: {
+              ticks: { color: '#6b7280' },
+              grid: { color: '#f3f4f6' }
+            }
+          }
+        }
+      });
+
+      console.log('✅ Chart loaded successfully');
+    } catch (error) {
+      console.error('❌ Load chart error:', error);
+      showAlert('Lỗi khi tải dữ liệu biểu đồ: ' + error.message, 'error');
+    }
+  }
+
+  // Initial load
+  console.log('🚀 Initializing admin dashboard...');
+  Promise.all([loadStats(), loadChartData()]).then(() => {
+    console.log('✅ Dashboard ready for printing');
+  });
+</script>
+</body>
+</html>

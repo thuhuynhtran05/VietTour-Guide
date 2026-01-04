@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin – Quản lý Tour | VietTour Guide</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --primary-light: #dbeafe;
+      --success: #10b981;
+      --success-hover: #059669;
+      --error: #ef4444;
+      --text-dark: #1e293b;
+      --text-medium: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --white: #ffffff;
+      --bg-light: #f8fafc;
+      --bg-gray: #f1f5f9;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--text-dark);
+      transition: transform 0.2s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.02);
+    }
+
+    .logo-icon {
+      width: 2rem;
+      height: 2rem;
+      color: var(--primary);
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .nav {
+      display: flex;
+      gap: 0.25rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-medium);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      padding: 0.625rem 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .nav-link:hover {
+      background-color: var(--bg-gray);
+      color: var(--text-dark);
+    }
+
+    .nav-link.active {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-left: 1rem;
+      padding-left: 1rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .admin-badge {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+    }
+
+    .user-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    /* Main Content */
+    main {
+      padding: 2.5rem 1rem 4rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 0;
+    }
+
+    .page-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      color: var(--text-dark);
+      letter-spacing: -0.025em;
+    }
+
+    .page-description {
+      font-size: 1.0625rem;
+      color: var(--text-medium);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Form Sections */
+    .form-section {
+      margin-bottom: 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-icon {
+      width: 1.75rem;
+      height: 1.75rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.015em;
+    }
+
+    .form-card {
+      background: var(--white);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .form-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .form-grid.two-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .required {
+      color: var(--error);
+    }
+
+    .form-input, .form-textarea, .form-select {
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 0.5rem;
+      font-size: 0.9375rem;
+      transition: all 0.2s ease;
+      background-color: var(--white);
+      font-family: inherit;
+      color: var(--text-dark);
+    }
+
+    .form-input:hover, .form-textarea:hover, .form-select:hover {
+      border-color: var(--text-medium);
+    }
+
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .form-input::placeholder, .form-textarea::placeholder {
+      color: var(--text-light);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.6;
+    }
+
+    .form-select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+      background-position: right 0.5rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+      padding-right: 2.5rem;
+      appearance: none;
+    }
+
+    .form-select[multiple] {
+      min-height: 180px;
+      background-image: none;
+      padding-right: 1rem;
+    }
+
+    .form-select option {
+      padding: 0.5rem;
+    }
+
+    /* File Upload Styles */
+    .file-upload {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed var(--border);
+      border-radius: 0.75rem;
+      padding: 3rem 2rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, rgba(59, 130, 246, 0.05) 100%);
+    }
+
+    .file-upload:hover {
+      border-color: var(--primary);
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.1) 100%);
+      transform: translateY(-2px);
+    }
+
+    .file-upload.dragover {
+      border-color: var(--primary);
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.15) 100%);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+      transform: scale(1.01);
+    }
+
+    .file-upload-input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .file-upload-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 1.25rem;
+      opacity: 0.8;
+    }
+
+    .file-upload-text {
+      text-align: center;
+      color: var(--text-medium);
+    }
+
+    .file-upload-title {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .file-upload-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-medium);
+    }
+
+    .file-list {
+      margin-top: 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      background: var(--bg-light);
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      border: 1px solid var(--border);
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .file-item:hover {
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+    }
+
+    .file-item svg {
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .file-item span {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--text-dark);
+    }
+
+    .file-remove {
+      background: none;
+      border: none;
+      color: var(--text-medium);
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 0.25rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .file-remove:hover {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--error);
+    }
+
+    /* Button Styles */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.875rem 1.75rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      gap: 0.625rem;
+      letter-spacing: 0.01em;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+      color: white;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, var(--success) 0%, var(--success-hover) 100%);
+      color: white;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-success:hover:not(:disabled) {
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .btn-success:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .btn svg {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+
+    .spinner {
+      animation: spin 1s linear infinite;
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Alert Styles */
+    .alert {
+      padding: 1rem 1.25rem;
+      border-radius: 0.75rem;
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.875rem;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .alert-success {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
+      border: 1.5px solid rgba(16, 185, 129, 0.3);
+      color: #065f46;
+    }
+
+    .alert-error {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+      border: 1.5px solid rgba(239, 68, 68, 0.3);
+      color: #991b1b;
+    }
+
+    .alert svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+    }
+
+    .helper-text {
+      font-size: 0.8125rem;
+      color: var(--text-medium);
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .helper-text svg {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+      color: var(--primary);
+    }
+
+    /* Info Box */
+    .info-box {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.02) 100%);
+      border: 1px solid var(--primary-light);
+      border-left: 4px solid var(--primary);
+      border-radius: 0.5rem;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.875rem;
+    }
+
+    .info-box svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+    }
+
+    .info-box-content {
+      font-size: 0.875rem;
+      color: var(--text-medium);
+      line-height: 1.6;
+    }
+
+    .info-box-title {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    /* Image Preview */
+    .image-preview {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+      }
+
+      .page-title {
+        font-size: 1.875rem;
+      }
+
+      .page-header {
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+      }
+
+      .form-card {
+        padding: 1.5rem;
+      }
+
+      .form-grid.two-cols {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+      }
+
+      .file-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span class="logo-text">VietTour Guide</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Trang chủ</a>
+        <a href="locations.html" class="nav-link">Địa điểm</a>
+        <a href="guides.html" class="nav-link">Hướng dẫn viên</a>
+        <a href="admin.html" class="nav-link">Dashboard</a>
+        <a href="admin-upload.html" class="nav-link active">Quản lý Tour</a>
+        <a href="admin-approve.html" class="nav-link">Duyệt HDV</a>
+        <div class="user-info">
+          <span class="admin-badge">ADMIN</span>
+          <span class="user-name" id="userName">Admin</span>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main>
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1 class="page-title">Quản lý Tour Guide</h1>
+    <p class="page-description">Tạo địa điểm du lịch mới và phân công hướng dẫn viên cho các tour</p>
+  </div>
+
+  <!-- Section 1: Create Location -->
+  <div class="form-section">
+    <div class="section-header">
+      <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
+      </svg>
+      <h2 class="section-title">Tạo địa điểm mới</h2>
+    </div>
+
+    <div class="form-card">
+      <div class="info-box">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 16v-4"></path>
+          <path d="M12 8h.01"></path>
+        </svg>
+        <div class="info-box-content">
+          <div class="info-box-title">Thông tin địa điểm</div>
+          Điền đầy đủ thông tin về địa điểm du lịch. Các trường có dấu <span style="color: var(--error)">*</span> là bắt buộc.
+        </div>
+      </div>
+
+      <form id="locationForm">
+        <div class="form-grid two-cols">
+          <div class="form-group">
+            <label class="form-label" for="locName">
+              Tên địa điểm <span class="required">*</span>
+            </label>
+            <input type="text" id="locName" class="form-input" required placeholder="VD: Vịnh Hạ Long, Phố cổ Hội An...">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="locCategory">Danh mục</label>
+            <input type="text" id="locCategory" class="form-input" placeholder="VD: Di sản văn hóa, Thiên nhiên...">
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label" for="locPrice">
+              Giá tour (VNĐ) <span class="required">*</span>
+            </label>
+            <input type="number" id="locPrice" class="form-input" required placeholder="VD: 500000" min="0" step="10000">
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label" for="locDesc">Mô tả chi tiết</label>
+            <textarea id="locDesc" class="form-textarea" rows="5" placeholder="Mô tả chi tiết về địa điểm, lịch sử, đặc điểm nổi bật..."></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">Hình ảnh địa điểm</label>
+            <div class="file-upload" id="fileUpload">
+              <input type="file" id="locImages" class="file-upload-input" name="images" multiple accept="image/*">
+              <svg class="file-upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21,15 16,10 5,21"></polyline>
+              </svg>
+              <div class="file-upload-text">
+                <div class="file-upload-title">Kéo thả ảnh vào đây hoặc click để chọn</div>
+                <div class="file-upload-subtitle">Hỗ trợ PNG, JPG, GIF • Tối đa 10MB mỗi file</div>
+              </div>
+            </div>
+            <div class="file-list" id="fileList"></div>
+          </div>
+        </div>
+
+        <button type="submit" id="locationSubmit" class="btn btn-primary btn-full">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+          </svg>
+          Tạo địa điểm mới
+        </button>
+
+        <div id="locMsg"></div>
+      </form>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  const API_BASE_URL = 'http://localhost:4000/api';
+
+  // ============= FILE UPLOAD HANDLING =============
+  let selectedFiles = [];
+
+  const fileUploadDiv = document.getElementById('fileUpload');
+  const fileInput = document.getElementById('locImages');
+  const fileList = document.getElementById('fileList');
+
+  // Click to upload
+  fileUploadDiv.addEventListener('click', () => {
+    fileInput.click();
+  });
+
+  // File input change
+  fileInput.addEventListener('change', (e) => {
+    handleFiles(e.target.files);
+  });
+
+  // Drag and drop
+  fileUploadDiv.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    fileUploadDiv.classList.add('dragover');
+  });
+
+  fileUploadDiv.addEventListener('dragleave', () => {
+    fileUploadDiv.classList.remove('dragover');
+  });
+
+  fileUploadDiv.addEventListener('drop', (e) => {
+    e.preventDefault();
+    fileUploadDiv.classList.remove('dragover');
+    handleFiles(e.dataTransfer.files);
+  });
+
+  function handleFiles(files) {
+    const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+
+    for (let file of files) {
+      // Validate file type
+      if (!allowedTypes.includes(file.type)) {
+        alert(`File ${file.name} không được hỗ trợ. Chỉ chấp nhận ảnh (JPG, PNG, GIF, WEBP)`);
+        continue;
+      }
+
+      // Validate file size
+      if (file.size > MAX_SIZE) {
+        alert(`File ${file.name} quá lớn. Kích thước tối đa là 10MB`);
+        continue;
+      }
+
+      // Check duplicate
+      if (selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
+        alert(`File ${file.name} đã được chọn`);
+        continue;
+      }
+
+      selectedFiles.push(file);
+    }
+
+    renderFileList();
+  }
+
+  function renderFileList() {
+    if (selectedFiles.length === 0) {
+      fileList.innerHTML = '';
+      return;
+    }
+
+    fileList.innerHTML = selectedFiles.map((file, index) => {
+      const fileSize = (file.size / 1024).toFixed(1) + ' KB';
+      return `
+          <div class="file-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21,15 16,10 5,21"></polyline>
+            </svg>
+            <span title="${file.name}">${file.name} (${fileSize})</span>
+            <button type="button" class="file-remove" onclick="removeFile(${index})">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        `;
+    }).join('');
+  }
+
+  function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    renderFileList();
+  }
+
+  // ============= CREATE LOCATION FORM =============
+  const locationForm = document.getElementById('locationForm');
+  const locationSubmit = document.getElementById('locationSubmit');
+  const locMsg = document.getElementById('locMsg');
+
+  locationForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('locName').value.trim();
+    const category = document.getElementById('locCategory').value.trim();
+    const price = document.getElementById('locPrice').value;
+    const description = document.getElementById('locDesc').value.trim();
+
+    if (!name || !price) {
+      showMessage(locMsg, 'Vui lòng điền đầy đủ thông tin bắt buộc', 'error');
+      return;
+    }
+
+    // Create FormData
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('category', category);
+    formData.append('price', price);
+    formData.append('description', description);
+
+    // Append images
+    selectedFiles.forEach(file => {
+      formData.append('images', file);
+    });
+
+    // Disable submit button
+    locationSubmit.disabled = true;
+    locationSubmit.innerHTML = `
+        <svg class="spinner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="2" x2="12" y2="6"></line>
+          <line x1="12" y1="18" x2="12" y2="22"></line>
+          <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+          <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+          <line x1="2" y1="12" x2="6" y2="12"></line>
+          <line x1="18" y1="12" x2="22" y2="12"></line>
+          <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+          <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+        </svg>
+        Đang tạo...
+      `;
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_BASE_URL}/locations`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showMessage(locMsg, 'Tạo địa điểm thành công!', 'success');
+        locationForm.reset();
+        selectedFiles = [];
+        renderFileList();
+
+        // Reload locations dropdown
+        loadLocations();
+      } else {
+        showMessage(locMsg, data.message || 'Có lỗi xảy ra', 'error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      showMessage(locMsg, 'Không thể kết nối tới server', 'error');
+    } finally {
+      locationSubmit.disabled = false;
+      locationSubmit.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+          </svg>
+          Tạo địa điểm mới
+        `;
+    }
+  });
+
+  // ============= ASSIGN GUIDES FORM =============
+  const assignForm = document.getElementById('assignForm');
+  const assignSubmit = document.getElementById('assignSubmit');
+  const assignMsg = document.getElementById('assignMsg');
+
+  assignForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const locationId = document.getElementById('selLocation').value;
+    const guideSelect = document.getElementById('selGuides');
+    const selectedGuides = Array.from(guideSelect.selectedOptions).map(opt => opt.value);
+
+    if (!locationId || selectedGuides.length === 0) {
+      showMessage(assignMsg, 'Vui lòng chọn địa điểm và ít nhất 1 hướng dẫn viên', 'error');
+      return;
+    }
+
+    assignSubmit.disabled = true;
+    assignSubmit.innerHTML = `
+        <svg class="spinner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="2" x2="12" y2="6"></line>
+          <line x1="12" y1="18" x2="12" y2="22"></line>
+          <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+          <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+          <line x1="2" y1="12" x2="6" y2="12"></line>
+          <line x1="18" y1="12" x2="22" y2="12"></line>
+          <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+          <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+        </svg>
+        Đang phân công...
+      `;
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_BASE_URL}/locations/${locationId}/guides`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ guideIds: selectedGuides })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showMessage(assignMsg, `Đã phân công ${selectedGuides.length} hướng dẫn viên thành công!`, 'success');
+        assignForm.reset();
+      } else {
+        showMessage(assignMsg, data.message || 'Có lỗi xảy ra', 'error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      showMessage(assignMsg, 'Không thể kết nối tới server', 'error');
+    } finally {
+      assignSubmit.disabled = false;
+      assignSubmit.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Phân công hướng dẫn viên
+        `;
+    }
+  });
+
+  // ============= LOAD LOCATIONS & GUIDES =============
+  async function loadLocations() {
+    const selLocation = document.getElementById('selLocation');
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_BASE_URL}/locations`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.locations) {
+        selLocation.innerHTML = '<option value="">-- Chọn địa điểm --</option>' +
+                data.locations.map(loc =>
+                        `<option value="${loc._id}">${loc.name} (${loc.price.toLocaleString('vi-VN')} VNĐ)</option>`
+                ).join('');
+      } else {
+        selLocation.innerHTML = '<option value="">Không có địa điểm nào</option>';
+      }
+    } catch (error) {
+      console.error('Error loading locations:', error);
+      selLocation.innerHTML = '<option value="">Lỗi tải danh sách</option>';
+    }
+  }
+
+  async function loadGuides() {
+    const selGuides = document.getElementById('selGuides');
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_BASE_URL}/guides?status=approved`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.guides) {
+        selGuides.innerHTML = data.guides.map(guide =>
+                `<option value="${guide._id}">${guide.fullName} - ${guide.languages?.join(', ') || 'N/A'}</option>`
+        ).join('');
+
+        if (data.guides.length === 0) {
+          selGuides.innerHTML = '<option>Chưa có hướng dẫn viên được duyệt</option>';
+        }
+      } else {
+        selGuides.innerHTML = '<option>Không có hướng dẫn viên nào</option>';
+      }
+    } catch (error) {
+      console.error('Error loading guides:', error);
+      selGuides.innerHTML = '<option>Lỗi tải danh sách</option>';
+    }
+  }
+
+  // ============= UTILITY FUNCTIONS =============
+  function showMessage(element, message, type) {
+    const icon = type === 'success'
+            ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>`
+            : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>`;
+
+    element.innerHTML = `
+        <div class="alert alert-${type}">
+          ${icon}
+          <span>${message}</span>
+        </div>
+      `;
+
+    // Auto hide after 5 seconds
+    setTimeout(() => {
+      element.innerHTML = '';
+    }, 5000);
+  }
+
+  // ============= INIT =============
+  document.addEventListener('DOMContentLoaded', () => {
+    // Check auth
+    const token = localStorage.getItem('token');
+    const userRole = localStorage.getItem('userRole');
+
+    if (!token) {
+      alert('Vui lòng đăng nhập');
+      window.location.href = 'login.html';
+      return;
+    }
+
+    if (userRole !== 'admin') {
+      alert('Chỉ admin mới có quyền truy cập trang này');
+      window.location.href = 'index.html';
+      return;
+    }
+
+    // Set user name
+    const userName = localStorage.getItem('userName');
+    if (userName) {
+      document.getElementById('userName').textContent = userName;
+    }
+
+    // Load initial data
+    loadLocations();
+    loadGuides();
+  });
+</script>
+</body>
+</html>

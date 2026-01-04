@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Đánh giá chuyến đi | VietTour Guide</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <style>
+    :root{
+      --white: #ffffff;
+      --bg-0: #0f172a;
+      --accent: #fbbf24;
+      --accent-hover: #f59e0b;
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --glass: rgba(255,255,255,0.08);
+      --glass-border: rgba(255,255,255,0.12);
+      --text-dark: #0b1220;
+      --text-light: rgba(255,255,255,0.95);
+      --text-muted: rgba(255,255,255,0.75);
+      --success: #10b981;
+      --error: #ef4444;
+      --shadow-sm: 0 4px 18px rgba(2,6,23,0.06);
+      --shadow-md: 0 10px 30px rgba(2,6,23,0.18);
+      --shadow-lg: 0 25px 50px -12px rgba(0,0,0,0.35);
+      --card-radius: 16px;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: var(--text-dark);
+      min-height:100vh;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+      overflow-y:auto;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* subtle decorative bg like other pages */
+    body::before{
+      content:"";
+      position:fixed;inset:0;
+      background-image: url('./1.avif');
+      background-size:cover;background-position:center;
+      filter: blur(6px) saturate(0.9) brightness(0.45);
+      z-index:-3;
+    }
+    body::after{
+      content:"";
+      position:fixed;inset:0;
+      background: radial-gradient(circle at 10% 10%, rgba(255,193,7,0.06), transparent 10%),
+                  radial-gradient(circle at 90% 90%, rgba(255,255,255,0.03), transparent 10%);
+      z-index:-2;
+    }
+
+    /* Header - đồng bộ với các trang khác */
+    header{
+      position:sticky;top:0;left:0;right:0;
+      z-index:40;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px) saturate(120%);
+      border-bottom: 1px solid rgba(16,24,40,0.06);
+      box-shadow: var(--shadow-sm);
+    }
+    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+    .logo{display:flex;align-items:center;gap:12px;color:var(--text-dark);font-weight:800;font-size:18px;text-decoration:none;transition:var(--transition)}
+    .logo:hover{opacity:0.85}
+    .logo-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#2563eb,#06b6d4);box-shadow:0 4px 12px rgba(37,99,235,0.25);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    nav{display:flex;gap:8px;align-items:center}
+    .nav-link{color:#475569;text-decoration:none;font-weight:600;font-size:15px;padding:10px 16px;border-radius:10px;transition:var(--transition)}
+    .nav-link:hover{background:rgba(16,24,40,0.05);color:var(--text-dark)}
+    .nav-link.active{color:var(--primary);background:rgba(37,99,235,0.08);font-weight:700}
+    .auth{display:flex;gap:12px;align-items:center}
+    .btn{
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-block;
+      transition:var(--transition);
+      border:none;
+    }
+    .btn-outline{background:transparent;border:1px solid rgba(16,24,40,0.12);color:#475569}
+    .btn-outline:hover{background:rgba(16,24,40,0.04);border-color:rgba(16,24,40,0.18)}
+    .btn-primary{background:var(--accent);color:#111;box-shadow:0 4px 14px rgba(251,191,36,0.3)}
+    .btn-primary:hover{background:var(--accent-hover);box-shadow:0 6px 18px rgba(245,158,11,0.4);transform:translateY(-1px)}
+
+    /* main layout */
+    main{padding:48px 0 80px;z-index:1;position:relative}
+    .review-wrap{max-width:720px;margin:0 auto;padding:0 24px}
+
+    /* breadcrumb - cải thiện */
+    .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:24px}
+    .breadcrumb a{color:var(--text-light);text-decoration:none;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.08);transition:var(--transition)}
+    .breadcrumb a:hover{background:rgba(255,255,255,0.12);transform:translateX(-2px)}
+
+    /* review card - làm mượt hơn */
+    .review-card{
+      background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      border: 1px solid var(--glass-border);
+      border-radius: var(--card-radius);
+      overflow:hidden;
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(20px) saturate(140%);
+    }
+
+    .review-header{
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      color:white;
+      padding:40px 32px;
+      text-align:center;
+      position:relative;
+    }
+    .review-header .icon{
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.15);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 16px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.2);
+      backdrop-filter:blur(10px);
+    }
+    .review-title{font-size:32px;font-weight:800;margin-bottom:8px;letter-spacing:-0.5px}
+    .review-sub{opacity:0.9;font-size:15px;font-weight:500}
+
+    .review-content{padding:36px 32px}
+
+    /* alert - cải thiện */
+    .alert{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;margin-bottom:20px;font-weight:600;font-size:14px}
+    .alert-success{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.25);color:#065f46}
+    .alert-error{background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.2);color:#991b1b}
+
+    /* star rating - cải thiện */
+    .star-row{display:flex;gap:10px;justify-content:center;margin-bottom:12px}
+    .star{
+      width:52px;
+      height:52px;
+      border-radius:12px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:all .25s cubic-bezier(.34,1.56,.64,1);
+      color: rgba(255,255,255,0.4);
+      font-size:24px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border:2px solid rgba(255,255,255,0.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .star:hover{
+      border-color:rgba(251,191,36,0.3);
+      background:rgba(251,191,36,0.08);
+    }
+    .star.active, .star.hover{
+      color: var(--accent);
+      background:linear-gradient(145deg,rgba(251,191,36,0.2),rgba(245,158,11,0.15));
+      border-color:var(--accent);
+      transform: scale(1.15) rotate(-8deg);
+      box-shadow: 0 8px 20px rgba(245,158,11,0.35);
+    }
+    .rating-text{color:var(--text-light);text-align:center;font-weight:700;font-size:16px;margin-bottom:8px}
+    .rating-desc{color:var(--accent);text-align:center;font-weight:700;font-size:18px;margin-bottom:20px;min-height:28px}
+
+    /* form elements */
+    .form-label{display:block;font-weight:700;color:var(--text-light);margin-bottom:12px;font-size:15px}
+    
+    /* textarea - cải thiện */
+    .comment-textarea{
+      width:100%;
+      min-height:160px;
+      padding:16px;
+      border-radius:12px;
+      border:2px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.06);
+      color: white;
+      font-size:15px;
+      line-height:1.6;
+      resize:vertical;
+      outline:none;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    .comment-textarea::placeholder{color:rgba(255,255,255,0.5)}
+    .comment-textarea:focus{
+      box-shadow:0 0 0 3px rgba(37,99,235,0.15), 0 10px 30px rgba(0,0,0,0.2);
+      transform:translateY(-2px);
+      border-color:var(--primary);
+      background:rgba(255,255,255,0.08);
+    }
+    .char-count{
+      text-align:right;
+      color:var(--text-muted);
+      font-weight:600;
+      font-size:13px;
+      margin-top:10px;
+    }
+
+    /* submit button - cải thiện */
+    .submit-button{
+      width:100%;
+      padding:16px;
+      border-radius:12px;
+      border:none;
+      background:linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+      color:white;
+      font-weight:700;
+      font-size:16px;
+      margin-top:24px;
+      cursor:pointer;
+      box-shadow:0 6px 20px rgba(37,99,235,0.3);
+      transition:var(--transition);
+    }
+    .submit-button:hover:not(:disabled){
+      transform:translateY(-2px);
+      box-shadow:0 10px 30px rgba(37,99,235,0.4);
+    }
+    .submit-button:active:not(:disabled){
+      transform:translateY(0);
+    }
+    .submit-button:disabled{
+      opacity:.5;
+      cursor:not-allowed;
+      transform:none;
+      box-shadow:none;
+    }
+
+    /* success view - cải thiện */
+    .success-state{display:none;padding:40px 28px;text-align:center;color:white}
+    .success-state.show{display:block}
+    .success-state h3{font-size:24px;font-weight:800;margin-bottom:12px;color:var(--text-light)}
+    .success-state p{opacity:.9;margin-bottom:24px;font-size:15px;color:var(--text-muted)}
+    .success-state .btn{margin-top:8px}
+
+    /* responsive */
+    @media (max-width:900px){
+      .header-inner{padding:0 16px}
+      nav{gap:4px}
+      .nav-link{padding:8px 12px;font-size:14px}
+      .star{width:48px;height:48px;font-size:22px}
+      .review-header{padding:32px 24px}
+      .review-content{padding:24px 20px}
+      .review-title{font-size:26px}
+      .breadcrumb{margin-bottom:20px}
+    }
+    
+    @media (max-width:640px){
+      .logo-text{display:none}
+      .nav{display:none}
+      .star{width:44px;height:44px;gap:8px}
+      .review-title{font-size:22px}
+      .review-header .icon{width:56px;height:56px}
+      .review-content{padding:20px 16px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-inner">
+      
+      <!-- LOGO -->
+      <a class="logo" href="index.html">
+        <div class="logo-icon"></div>
+        <span class="logo-text">VietTour Guide</span>
+      </a>
+
+      <!-- NAV -->
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Trang chủ</a>
+        <a href="locations.html" class="nav-link">Địa điểm</a>
+        <a href="guides.html" class="nav-link">Hướng dẫn viên</a>
+        <a href="my-bookings.html" class="nav-link active">Tour của tôi</a>
+      </nav>
+
+      <!-- AUTH (Đăng nhập – Đăng ký) -->
+      <div class="auth">
+        <a href="login.html" class="btn btn-outline">Đăng nhập</a>
+        <a href="register.html" class="btn btn-primary">Đăng ký</a>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+
+  <main>
+    <div class="review-wrap container">
+      <div class="breadcrumb">
+        <a href="my-bookings.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Quay lại tour của tôi
+        </a>
+      </div>
+
+      <div class="review-card" id="reviewCard">
+        <div class="review-header">
+          <div class="icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          </div>
+          <div class="review-title">Đánh giá chuyến đi</div>
+          <div class="review-sub">Chia sẻ trải nghiệm để giúp cộng đồng du lịch</div>
+        </div>
+
+        <div class="review-content">
+          <div id="alertContainer"></div>
+
+          <!-- form -->
+          <form id="reviewForm" aria-label="Form đánh giá">
+            <div style="margin-bottom:18px">
+              <div class="rating-text" id="ratingText">Chọn số sao để đánh giá</div>
+              <div class="star-row" id="starRow" role="radiogroup" aria-label="Đánh giá sao">
+                <!-- stars (we'll use inline svg icons) -->
+                <div class="star" data-value="1" tabindex="0" role="radio" aria-checked="false" title="1 sao">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+                </div>
+                <div class="star" data-value="2" tabindex="0" role="radio" aria-checked="false" title="2 sao">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+                </div>
+                <div class="star" data-value="3" tabindex="0" role="radio" aria-checked="false" title="3 sao">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+                </div>
+                <div class="star" data-value="4" tabindex="0" role="radio" aria-checked="false" title="4 sao">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+                </div>
+                <div class="star" data-value="5" tabindex="0" role="radio" aria-checked="false" title="5 sao">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+                </div>
+              </div>
+              <div class="rating-desc" id="ratingDesc"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="commentInput">Nhận xét của bạn</label>
+              <textarea id="commentInput" class="comment-textarea" maxlength="500" placeholder="Chia sẻ trải nghiệm: hướng dẫn viên, lịch trình, dịch vụ, địa điểm..."></textarea>
+              <div class="char-count"><span id="charCount">0</span> / 500 ký tự</div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="submit-button">
+              Gửi đánh giá
+            </button>
+          </form>
+
+          <!-- success state -->
+          <div id="successState" class="success-state" aria-hidden="true">
+            <div style="font-size:56px;margin-bottom:16px;color:var(--success)">✓</div>
+            <h3>Cảm ơn bạn đã đánh giá!</h3>
+            <p>Đánh giá của bạn giúp cộng đồng chọn tour phù hợp hơn.</p>
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+              <a href="index.html" class="btn btn-primary">Về trang chủ</a>
+              <a href="my-bookings.html" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.2)">Tour của tôi</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+<script>
+  (function(){
+    const ratingTexts = {
+      1: 'Rất tệ',
+      2: 'Tệ',
+      3: 'Bình thường',
+      4: 'Tốt',
+      5: 'Tuyệt vời'
+    };
+
+    const stars = Array.from(document.querySelectorAll('.star'));
+    const ratingTextEl = document.getElementById('ratingText');
+    const ratingDescEl = document.getElementById('ratingDesc');
+    const commentInput = document.getElementById('commentInput');
+    const charCount = document.getElementById('charCount');
+    const reviewForm = document.getElementById('reviewForm');
+    const alertContainer = document.getElementById('alertContainer');
+    const submitBtn = document.getElementById('submitBtn');
+    const successState = document.getElementById('successState');
+    const reviewCard = document.getElementById('reviewCard');
+
+    let currentRating = 0;
+
+    // keyboard + mouse interactions for stars
+    stars.forEach(star => {
+      const val = Number(star.dataset.value);
+
+      star.addEventListener('click', () => setRating(val));
+      star.addEventListener('mouseenter', () => highlight(val));
+      star.addEventListener('mouseleave', () => highlight(currentRating));
+      star.addEventListener('focus', () => highlight(val));
+      star.addEventListener('blur', () => highlight(currentRating));
+      star.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setRating(val); }
+        if (e.key === 'ArrowRight' || e.key === 'ArrowUp'){ e.preventDefault(); focusNext(star); }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowDown'){ e.preventDefault(); focusPrev(star); }
+      });
+    });
+
+    function focusNext(el){
+      const i = stars.indexOf(el);
+      const next = stars[i+1] || stars[0];
+      next.focus();
+    }
+    function focusPrev(el){
+      const i = stars.indexOf(el);
+      const prev = stars[i-1] || stars[stars.length-1];
+      prev.focus();
+    }
+
+    function highlight(r){
+      stars.forEach(s=>{
+        const v = Number(s.dataset.value);
+        s.classList.toggle('active', v <= r);
+        s.setAttribute('aria-checked', v === r ? 'true' : 'false');
+      });
+      ratingTextEl.textContent = r ? `Bạn đã chọn ${r} sao` : 'Chọn số sao để đánh giá';
+      ratingDescEl.textContent = r ? ratingTexts[r] : '';
+    }
+
+    function setRating(r){
+      currentRating = r;
+      highlight(r);
+    }
+
+    // char count
+    commentInput.addEventListener('input', () => {
+      charCount.textContent = commentInput.value.length;
+    });
+
+    // small helper: create alert
+    function showAlert(type, text){
+      alertContainer.innerHTML = '';
+      const div = document.createElement('div');
+      div.className = 'alert ' + (type === 'success'? 'alert-success' : 'alert-error');
+      div.textContent = text;
+      alertContainer.appendChild(div);
+      setTimeout(()=> {
+        if (div.parentNode) div.parentNode.removeChild(div);
+      }, 4500);
+    }
+
+    // mock submit function (replace with real API call)
+    async function sendReview(payload){
+      // simulate network latency
+      await new Promise(res=>setTimeout(res, 900));
+      // simulate random error ~10%
+      if (Math.random() < 0.10) throw new Error('Lỗi mạng, thử lại sau.');
+      return { ok: true };
+    }
+
+    reviewForm.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      alertContainer.innerHTML = '';
+
+      if (!currentRating){
+        showAlert('error', 'Vui lòng chọn số sao trước khi gửi.');
+        return;
+      }
+      const comment = commentInput.value.trim();
+      if (comment.length < 5){
+        showAlert('error','Nhận xét quá ngắn (ít nhất 5 ký tự).');
+        return;
+      }
+
+      // disable UI
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Đang gửi...';
+
+      const payload = {
+        rating: currentRating,
+        comment,
+        // add extras if needed e.g. tourId, bookingId, userId
+      };
+
+      try {
+        await sendReview(payload); // replace with fetch POST to your API
+        // show success UI
+        reviewForm.style.display = 'none';
+        successState.classList.add('show');
+        successState.setAttribute('aria-hidden','false');
+      } catch (err) {
+        showAlert('error', err.message || 'Gửi thất bại, thử lại.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Gửi đánh giá';
+      }
+    });
+
+    // initial highlight (none)
+    highlight(0);
+  })();
+</script>
+</body>
+</html>

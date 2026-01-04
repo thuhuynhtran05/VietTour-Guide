@@ -1,0 +1,405 @@
+[{
+  "_id": {
+    "$oid": "6827502e3e2cf074922703d1"
+  },
+  "roomId": "6825ff81ca51616192c369d0_68274b6dc9adcbde47d16703",
+  "senderId": {
+    "$oid": "68274b6dc9adcbde47d16701"
+  },
+  "senderName": "Phan Hoài Trinh",
+  "message": "dsadsa",
+  "timestamp": {
+    "$date": "2025-05-16T14:48:14.181Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682750333e2cf074922703d5"
+  },
+  "roomId": "6825ff81ca51616192c369d0_68274b6dc9adcbde47d16703",
+  "senderId": {
+    "$oid": "68274b6dc9adcbde47d16701"
+  },
+  "senderName": "Phan Thuc Trinh",
+  "message": "dsadsa",
+  "timestamp": {
+    "$date": "2025-05-16T14:48:19.204Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6827514a3e2cf074922703d7"
+  },
+  "roomId": "6825ff81ca51616192c369d0_68274b6dc9adcbde47d16703",
+  "senderId": {
+    "$oid": "68274b6dc9adcbde47d16701"
+  },
+  "senderName": "Phan Thuc Trinh",
+  "message": "Hôm nay bạn thế nào",
+  "timestamp": {
+    "$date": "2025-05-16T14:52:58.494Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682751503e2cf074922703d9"
+  },
+  "roomId": "6825ff81ca51616192c369d0_68274b6dc9adcbde47d16703",
+  "senderId": {
+    "$oid": "68274b6dc9adcbde47d16701"
+  },
+  "senderName": "Phan Hoài Trinh",
+  "message": "Tôi ổn",
+  "timestamp": {
+    "$date": "2025-05-16T14:53:04.505Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68275aaa6c0e281e1b1a45fe"
+  },
+  "roomId": "68274b6dc9adcbde47d16701_68274b6dc9adcbde47d16703",
+  "senderId": {
+    "$oid": "68274b6dc9adcbde47d16701"
+  },
+  "senderName": "Phan Thuc Trinh",
+  "message": "Chào bạn",
+  "timestamp": {
+    "$date": "2025-05-16T15:32:58.494Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68275ac16c0e281e1b1a4602"
+  },
+  "roomId": "68274b6dc9adcbde47d16701_68274b6dc9adcbde47d16703",
+  "senderId": {
+    "$oid": "68274b6dc9adcbde47d16701"
+  },
+  "senderName": "Phan Thuc Trinh",
+  "message": "chào bạn",
+  "timestamp": {
+    "$date": "2025-05-16T15:33:21.597Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68275ae96c0e281e1b1a4604"
+  },
+  "roomId": "68274b6dc9adcbde47d16701_68274b6dc9adcbde47d16703",
+  "senderId": {
+    "$oid": "68274b6dc9adcbde47d16701"
+  },
+  "senderName": "Phan Thuc Trinh",
+  "message": "sadsad",
+  "timestamp": {
+    "$date": "2025-05-16T15:34:01.335Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68275aec6c0e281e1b1a4606"
+  },
+  "roomId": "68274b6dc9adcbde47d16701_68274b6dc9adcbde47d16703",
+  "senderId": {
+    "$oid": "68274b6dc9adcbde47d16701"
+  },
+  "senderName": "Phan Thuc Trinh",
+  "message": "sadsad",
+  "timestamp": {
+    "$date": "2025-05-16T15:34:04.809Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68275f727a9b02497c72ca1b"
+  },
+  "roomId": "6825ff81ca51616192c369d0_68274b6dc9adcbde47d16703",
+  "senderId": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "senderName": "Phan Hoài Trinh",
+  "message": "chào bạn",
+  "timestamp": {
+    "$date": "2025-05-16T15:53:22.768Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68275f7e7a9b02497c72ca1f"
+  },
+  "roomId": "6825ff81ca51616192c369d0_68274b6dc9adcbde47d16703",
+  "senderId": {
+    "$oid": "68274b6dc9adcbde47d16701"
+  },
+  "senderName": "Phan Thuc Trinh",
+  "message": "bạn có nhu cầu gì ạ",
+  "timestamp": {
+    "$date": "2025-05-16T15:53:34.736Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682bf88622248016b5ca3ca6"
+  },
+  "roomId": "6825ff81ca51616192c369d0_682bf7f722248016b5ca3c8a",
+  "senderId": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "senderName": "Phan Hoài Trinh",
+  "message": "sadsa",
+  "timestamp": {
+    "$date": "2025-05-20T03:35:34.207Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682bf8c422248016b5ca3cae"
+  },
+  "roomId": "6825ff81ca51616192c369d0_682bf7f722248016b5ca3c8a",
+  "senderId": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "senderName": "Phan Hoài Trinh",
+  "message": "Chao ban",
+  "timestamp": {
+    "$date": "2025-05-20T03:36:36.680Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682bf8cb22248016b5ca3cb2"
+  },
+  "roomId": "6825ff81ca51616192c369d0_682bf7f722248016b5ca3c8a",
+  "senderId": {
+    "$oid": "682bf7f722248016b5ca3c88"
+  },
+  "senderName": "Phan Tuan Dat",
+  "message": "asdasd",
+  "timestamp": {
+    "$date": "2025-05-20T03:36:43.104Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682bf8cf22248016b5ca3cb4"
+  },
+  "roomId": "6825ff81ca51616192c369d0_682bf7f722248016b5ca3c8a",
+  "senderId": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "senderName": "Phan Hoài Trinh",
+  "message": "dsadsa",
+  "timestamp": {
+    "$date": "2025-05-20T03:36:47.547Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683d6cfbf8ccfa913ec864a7"
+  },
+  "roomId": "683d6cc9f8ccfa913ec86493_683d6cc9f8ccfa913ec86495",
+  "senderId": {
+    "$oid": "683d6cc9f8ccfa913ec86493"
+  },
+  "senderName": "Phan Thanh Tu",
+  "message": "Xin chao ban",
+  "timestamp": {
+    "$date": "2025-06-02T09:20:59.907Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683d6d09f8ccfa913ec864ab"
+  },
+  "roomId": "683d6cc9f8ccfa913ec86493_683d6cc9f8ccfa913ec86495",
+  "senderId": {
+    "$oid": "683d6cc9f8ccfa913ec86493"
+  },
+  "senderName": "Phan Thanh Tu",
+  "message": "Minh giup duoc gi a",
+  "timestamp": {
+    "$date": "2025-06-02T09:21:13.138Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683d6d33f8ccfa913ec864b9"
+  },
+  "roomId": "6825ff81ca51616192c369d0_683d6cc9f8ccfa913ec86495",
+  "senderId": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "senderName": "Phan Hoài Trinh",
+  "message": "Chao ban",
+  "timestamp": {
+    "$date": "2025-06-02T09:21:55.043Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683d6d3cf8ccfa913ec864bd"
+  },
+  "roomId": "6825ff81ca51616192c369d0_683d6cc9f8ccfa913ec86495",
+  "senderId": {
+    "$oid": "683d6cc9f8ccfa913ec86493"
+  },
+  "senderName": "Phan Thanh Tu",
+  "message": "Vang a",
+  "timestamp": {
+    "$date": "2025-06-02T09:22:04.993Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683ecfd13593c6d28d81999e"
+  },
+  "roomId": "683ecdc3e5d949e65e562761_683ecdc3e5d949e65e562763",
+  "senderId": {
+    "$oid": "683ecdc3e5d949e65e562761"
+  },
+  "senderName": "Thao Van",
+  "message": "Chao hdv",
+  "timestamp": {
+    "$date": "2025-06-03T10:34:57.221Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683ecfd73593c6d28d8199a2"
+  },
+  "roomId": "683ecdc3e5d949e65e562761_683ecdc3e5d949e65e562763",
+  "senderId": {
+    "$oid": "683ecdc3e5d949e65e562761"
+  },
+  "senderName": "Thao Van",
+  "message": "Chao ban",
+  "timestamp": {
+    "$date": "2025-06-03T10:35:03.250Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f1524e6883409a4d70fa6"
+  },
+  "roomId": "683f1490e6883409a4d70f93_683ecdc3e5d949e65e562763",
+  "senderId": {
+    "$oid": "683f1490e6883409a4d70f93"
+  },
+  "senderName": "Thanh Thao",
+  "message": "Chao ban",
+  "timestamp": {
+    "$date": "2025-06-03T15:30:44.355Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f1530e6883409a4d70faa"
+  },
+  "roomId": "683f1490e6883409a4d70f93_683ecdc3e5d949e65e562763",
+  "senderId": {
+    "$oid": "683ecdc3e5d949e65e562761"
+  },
+  "senderName": "Thao Van",
+  "message": "Chao thao a",
+  "timestamp": {
+    "$date": "2025-06-03T15:30:56.308Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6840222723ed037f130bbdf4"
+  },
+  "roomId": "6825ff81ca51616192c369d0_683ecdc3e5d949e65e562763",
+  "senderId": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "senderName": "Phan Hoài Trinh",
+  "message": "Chao ban",
+  "timestamp": {
+    "$date": "2025-06-04T10:38:31.554Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6840223323ed037f130bbdf9"
+  },
+  "roomId": "6825ff81ca51616192c369d0_683ecdc3e5d949e65e562763",
+  "senderId": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "senderName": "Phan Hoài Trinh",
+  "message": "Chao ban",
+  "timestamp": {
+    "$date": "2025-06-04T10:38:43.365Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6840224223ed037f130bbdfd"
+  },
+  "roomId": "6825ff81ca51616192c369d0_683ecdc3e5d949e65e562763",
+  "senderId": {
+    "$oid": "683ecdc3e5d949e65e562761"
+  },
+  "senderName": "Thao Van",
+  "message": "xcam on ban da lien he",
+  "timestamp": {
+    "$date": "2025-06-04T10:38:58.582Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68403def7fef9bb9d2718792"
+  },
+  "roomId": "6825ff81ca51616192c369d0_683f14cee6883409a4d70f98",
+  "senderId": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "senderName": "Phan Hoài Trinh",
+  "message": "chao ban",
+  "timestamp": {
+    "$date": "2025-06-04T12:37:03.787Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68403df77fef9bb9d2718796"
+  },
+  "roomId": "6825ff81ca51616192c369d0_683f14cee6883409a4d70f98",
+  "senderId": {
+    "$oid": "683f14cee6883409a4d70f96"
+  },
+  "senderName": "Thanh Thinh",
+  "message": "vang a",
+  "timestamp": {
+    "$date": "2025-06-04T12:37:11.631Z"
+  },
+  "__v": 0
+}]

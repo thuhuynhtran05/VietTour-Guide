@@ -1,0 +1,356 @@
+[{
+  "_id": {
+    "$oid": "682f39ca6a5a0b1d5297363c"
+  },
+  "user": {
+    "$oid": "682f39ca6a5a0b1d5297363a"
+  },
+  "certifications": [
+    "Certified Tour Guide"
+  ],
+  "languages": [
+    "English",
+    "Vietnamese"
+  ],
+  "bio": "Bio of Alice",
+  "rating": 5,
+  "locations": [
+    {
+      "$oid": "682f39ca6a5a0b1d52973635"
+    },
+    {
+      "$oid": "682f39ca6a5a0b1d52973636"
+    },
+    {
+      "$oid": "682f4188779b9556818120f5"
+    },
+    {
+      "$oid": "682f41de779b95568181210f"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-05-22T14:50:50.827Z"
+  },
+  "updatedAt": {
+    "$date": "2025-05-22T15:25:43.635Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682f39ca6a5a0b1d52973640"
+  },
+  "user": {
+    "$oid": "682f39ca6a5a0b1d5297363e"
+  },
+  "certifications": [
+    "Certified Tour Guide"
+  ],
+  "languages": [
+    "English",
+    "Vietnamese"
+  ],
+  "bio": "Bio of Bob",
+  "rating": 3,
+  "locations": [
+    {
+      "$oid": "682f39ca6a5a0b1d52973636"
+    },
+    {
+      "$oid": "682f39ca6a5a0b1d52973637"
+    },
+    {
+      "$oid": "682f39ca6a5a0b1d52973635"
+    },
+    {
+      "$oid": "682f39ca6a5a0b1d52973638"
+    },
+    {
+      "$oid": "682f40ca779b9556818120e1"
+    },
+    {
+      "$oid": "682f4188779b9556818120f5"
+    },
+    {
+      "$oid": "682f41de779b95568181210f"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-05-22T14:50:50.901Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-02T14:03:57.326Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683d6cc9f8ccfa913ec86495"
+  },
+  "user": {
+    "$oid": "683d6cc9f8ccfa913ec86493"
+  },
+  "certifications": [
+    "Cao dang"
+  ],
+  "languages": [
+    "Anh",
+    "Trung"
+  ],
+  "bio": "Lich Su",
+  "rating": 2.8,
+  "locations": [
+    {
+      "$oid": "682f39ca6a5a0b1d52973637"
+    },
+    {
+      "$oid": "682f40ca779b9556818120e1"
+    },
+    {
+      "$oid": "682f41de779b95568181210f"
+    },
+    {
+      "$oid": "682f40e2779b9556818120eb"
+    },
+    {
+      "$oid": "682f4188779b9556818120f5"
+    },
+    {
+      "$oid": "683f07bfb5f8fca270bd7b84"
+    },
+    {
+      "$oid": "683f0262493b46a993fd1c78"
+    },
+    {
+      "$oid": "68403efbe04591cab0b77ed6"
+    }
+  ],
+  "approved": true,
+  "createdAt": {
+    "$date": "2025-06-02T09:20:09.602Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T12:41:48.724Z"
+  },
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "683dc8890dbef607f1b095c1"
+  },
+  "user": {
+    "$oid": "683dc8890dbef607f1b095bf"
+  },
+  "certifications": [
+    "Dai Hoc"
+  ],
+  "languages": [
+    "Phap",
+    "Anh"
+  ],
+  "bio": "123",
+  "rating": 2,
+  "locations": [
+    {
+      "$oid": "682f40ca779b9556818120e1"
+    },
+    {
+      "$oid": "682f41de779b95568181210f"
+    },
+    {
+      "$oid": "682f40e2779b9556818120eb"
+    },
+    {
+      "$oid": "682f4188779b9556818120f5"
+    },
+    {
+      "$oid": "683f07bfb5f8fca270bd7b84"
+    },
+    {
+      "$oid": "683f0262493b46a993fd1c78"
+    },
+    {
+      "$oid": "68403efbe04591cab0b77ed6"
+    }
+  ],
+  "approved": true,
+  "createdAt": {
+    "$date": "2025-06-02T15:51:37.659Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T12:41:48.734Z"
+  },
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "683eb9ba734d2a658dfdb9ea"
+  },
+  "user": {
+    "$oid": "683eb9ba734d2a658dfdb9e8"
+  },
+  "certifications": [
+    "Dai Hoc"
+  ],
+  "languages": [
+    "Phap",
+    "Anh"
+  ],
+  "bio": "Oke",
+  "rating": 0,
+  "locations": [
+    {
+      "$oid": "682f40ca779b9556818120e1"
+    },
+    {
+      "$oid": "682f40e2779b9556818120eb"
+    },
+    {
+      "$oid": "682f4188779b9556818120f5"
+    },
+    {
+      "$oid": "682f41de779b95568181210f"
+    },
+    {
+      "$oid": "68403efbe04591cab0b77ed6"
+    }
+  ],
+  "approved": true,
+  "createdAt": {
+    "$date": "2025-06-03T09:00:42.078Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T12:41:48.738Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "683ecdc3e5d949e65e562763"
+  },
+  "user": {
+    "$oid": "683ecdc3e5d949e65e562761"
+  },
+  "certifications": [
+    "Dai Hoc"
+  ],
+  "languages": [
+    "Phap",
+    "Anh"
+  ],
+  "bio": "dep",
+  "rating": 0,
+  "locations": [
+    {
+      "$oid": "682f40ca779b9556818120e1"
+    },
+    {
+      "$oid": "682f40e2779b9556818120eb"
+    },
+    {
+      "$oid": "682f4188779b9556818120f5"
+    },
+    {
+      "$oid": "682f41de779b95568181210f"
+    },
+    {
+      "$oid": "683f10a784a2b70e4cfa32e5"
+    },
+    {
+      "$oid": "683f28732b59bc468d19b250"
+    }
+  ],
+  "approved": true,
+  "createdAt": {
+    "$date": "2025-06-03T10:26:11.505Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-03T16:53:26.363Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "683f14cee6883409a4d70f98"
+  },
+  "user": {
+    "$oid": "683f14cee6883409a4d70f96"
+  },
+  "certifications": [
+    "Dai Hoc"
+  ],
+  "languages": [
+    "Phap",
+    "Anh",
+    "Trung"
+  ],
+  "bio": "Nhiet tinh",
+  "rating": 1,
+  "locations": [
+    {
+      "$oid": "683f28732b59bc468d19b250"
+    }
+  ],
+  "approved": true,
+  "createdAt": {
+    "$date": "2025-06-03T15:29:18.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T12:40:18.167Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "684014e16babeeadda8e7df2"
+  },
+  "user": {
+    "$oid": "684014e16babeeadda8e7df0"
+  },
+  "certifications": [
+    "Dai Hoc"
+  ],
+  "languages": [
+    "Phap",
+    "Anh",
+    "Trung"
+  ],
+  "bio": "213213",
+  "rating": 0,
+  "locations": [],
+  "approved": true,
+  "createdAt": {
+    "$date": "2025-06-04T09:41:53.265Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T09:42:02.921Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68403d867fef9bb9d271877a"
+  },
+  "user": {
+    "$oid": "68403d867fef9bb9d2718778"
+  },
+  "certifications": [
+    "Dai Hoc"
+  ],
+  "languages": [
+    "Phap",
+    "Anh",
+    "Trung"
+  ],
+  "bio": "123",
+  "rating": 0,
+  "locations": [],
+  "approved": true,
+  "createdAt": {
+    "$date": "2025-06-04T12:35:18.158Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T12:35:40.898Z"
+  },
+  "__v": 0
+}]

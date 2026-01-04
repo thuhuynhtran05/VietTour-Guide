@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chi tiết hướng dẫn viên | VietTour Guide</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #dbeafe;
+      --success: #10b981;
+      --success-hover: #059669;
+      --error: #ef4444;
+      --warning: #f59e0b;
+      --text-dark: #1f2937;
+      --text-medium: #4b5563;
+      --text-light: #6b7280;
+      --border: #e2e8f0;
+      --bg: #f9fafb;
+      --white: #ffffff;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #eff6ff, #ffffff, #f0fdf4);
+      color: var(--text-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ============= HEADER ============= */
+    header {
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 1.25rem;
+      font-weight: 700;
+      transition: transform 0.2s;
+    }
+
+    .logo:hover {
+      transform: scale(1.02);
+    }
+
+    .logo-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      color: var(--primary);
+    }
+
+    .nav {
+      display: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .nav {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      color: var(--text-medium);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--primary);
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    /* ============= MAIN CONTENT ============= */
+    main {
+      padding: 2.5rem 1rem;
+    }
+
+    .guide-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      font-size: 0.875rem;
+      color: var(--text-medium);
+    }
+
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary-hover);
+    }
+
+    /* Guide Profile Card */
+    .guide-profile {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .profile-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .profile-avatar {
+      width: 7rem;
+      height: 7rem;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s;
+    }
+
+    .profile-avatar:hover {
+      transform: scale(1.05);
+    }
+
+    .profile-name {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-title {
+      font-size: 1.125rem;
+      opacity: 0.95;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+
+    .rating-stars {
+      color: #fbbf24;
+      font-size: 1.25rem;
+    }
+
+    /* Profile Content */
+    .profile-content {
+      padding: 2.5rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .info-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .info-section {
+      background-color: var(--bg);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+
+    .info-section:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .info-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: var(--text-dark);
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    .info-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: var(--primary);
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .info-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: var(--text-medium);
+      min-width: 100px;
+    }
+
+    .info-value {
+      color: var(--text-dark);
+      text-align: right;
+      flex: 1;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: flex-end;
+    }
+
+    .tag {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .tag:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .bio-section {
+      grid-column: 1 / -1;
+    }
+
+    .bio-text {
+      color: var(--text-medium);
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      gap: 0.75rem;
+      text-decoration: none;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--success);
+      border: 2px solid var(--success);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--success);
+      color: white;
+    }
+
+    /* Chat FAB */
+    .chat-fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--success), var(--success-hover));
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+      transition: all 0.3s;
+      z-index: 90;
+    }
+
+    .chat-fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 32px rgba(16, 185, 129, 0.5);
+    }
+
+    .chat-fab-icon {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    /* Chat Container */
+    .chat-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 400px;
+      max-width: calc(100vw - 2rem);
+      height: 600px;
+      max-height: calc(100vh - 4rem);
+      background-color: var(--white);
+      border-radius: 1.25rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--border);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 100;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chat-container.show {
+      display: flex;
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: white;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 1;
+    }
+
+    .chat-avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .chat-header-text {
+      flex: 1;
+    }
+
+    .chat-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.125rem;
+    }
+
+    .chat-status {
+      font-size: 0.75rem;
+      opacity: 0.9;
+    }
+
+    .chat-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-close:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
+      background-color: var(--bg);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .chat-messages::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background-color: var(--border);
+      border-radius: 4px;
+    }
+
+    .chat-message {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      animation: messageSlide 0.3s ease-out;
+    }
+
+    @keyframes messageSlide {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .chat-message.own {
+      align-items: flex-end;
+    }
+
+    .chat-message.other {
+      align-items: flex-start;
+    }
+
+    .message-bubble {
+      max-width: 75%;
+      padding: 0.875rem 1.125rem;
+      border-radius: 1.25rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .chat-message.own .message-bubble {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: white;
+      border-bottom-right-radius: 0.375rem;
+    }
+
+    .chat-message.other .message-bubble {
+      background-color: var(--white);
+      color: var(--text-dark);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 0.375rem;
+    }
+
+    .message-sender {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-weight: 600;
+      margin: 0 0.75rem;
+    }
+
+    .message-time {
+      font-size: 0.6875rem;
+      color: var(--text-light);
+      margin: 0 0.75rem;
+    }
+
+    .chat-input-container {
+      padding: 1.25rem;
+      border-top: 1px solid var(--border);
+      background-color: var(--white);
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 1.5rem;
+      font-size: 0.9375rem;
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    .chat-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .chat-send {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chat-send:hover:not(:disabled) {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .chat-send:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .chat-send-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    /* Loading State */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem;
+      color: var(--text-medium);
+    }
+
+    .spinner {
+      animation: spin 1s linear infinite;
+      margin-right: 0.75rem;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Empty Chat */
+    .empty-chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-light);
+    }
+
+    .empty-chat svg {
+      width: 4rem;
+      height: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .profile-header {
+        padding: 2rem 1.5rem;
+      }
+
+      .profile-name {
+        font-size: 1.75rem;
+      }
+
+      .profile-content {
+        padding: 1.5rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .chat-container {
+        width: calc(100vw - 2rem);
+        height: calc(100vh - 4rem);
+        bottom: 1rem;
+        right: 1rem;
+      }
+
+      .chat-fab {
+        bottom: 1.5rem;
+        right: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span>VietTour Guide</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Trang chủ</a>
+        <a href="locations.html" class="nav-link">Địa điểm</a>
+        <a href="guides.html" class="nav-link active">Hướng dẫn viên</a>
+        <a href="my-bookings.html" class="nav-link">Tour của tôi</a>
+        <div class="user-info">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span id="userName">Khách hàng</span>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main>
+  <div class="guide-container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="guides.html">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        Quay lại danh sách
+      </a>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="loading">
+      <svg class="spinner" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+      </svg>
+      <span>Đang tải thông tin hướng dẫn viên...</span>
+    </div>
+
+    <!-- Guide Profile -->
+    <div id="guideProfile" class="guide-profile" style="display: none;">
+      <div class="profile-header">
+        <div class="profile-avatar" id="profileAvatar">H</div>
+        <h1 class="profile-name" id="profileName">Đang tải...</h1>
+        <p class="profile-title">Hướng dẫn viên du lịch chuyên nghiệp</p>
+        <div class="profile-rating">
+          <span class="rating-stars" id="ratingStars">⭐⭐⭐⭐⭐</span>
+          <span id="ratingText">5.0</span>
+        </div>
+      </div>
+
+      <div class="profile-content">
+        <div class="info-grid">
+          <!-- Contact Info -->
+          <div class="info-section">
+            <h3 class="info-title">
+              <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              Thông tin liên hệ
+            </h3>
+            <div class="info-item">
+              <span class="info-label">📧 Email:</span>
+              <span class="info-value" id="profileEmail">-</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">📱 Điện thoại:</span>
+              <span class="info-value" id="profilePhone">-</span>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="info-section">
+            <h3 class="info-title">
+              <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              Kỹ năng & Chứng chỉ
+            </h3>
+            <div class="info-item">
+              <span class="info-label">🌍 Ngôn ngữ:</span>
+              <div class="info-value tags" id="profileLanguages"></div>
+            </div>
+            <div class="info-item">
+              <span class="info-label">📜 Chứng chỉ:</span>
+              <div class="info-value tags" id="profileCertifications"></div>
+            </div>
+          </div>
+
+          <!-- Bio -->
+          <div class="info-section bio-section">
+            <h3 class="info-title">
+              <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              Giới thiệu về hướng dẫn viên
+            </h3>
+            <p class="bio-text" id="profileBio">Đang tải thông tin...</p>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button id="bookBtn" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            Đặt lịch tour ngay
+          </button>
+          <button class="btn btn-outline" onclick="toggleChat()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            Chat với hướng dẫn viên
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Chat FAB -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()">
+  <svg class="chat-fab-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+</button>
+
+<!-- Chat Container -->
+<div class="chat-container" id="chatContainer">
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <div class="chat-avatar" id="chatAvatar">H</div>
+      <div class="chat-header-text">
+        <div class="chat-title" id="chatTitle">Hướng dẫn viên</div>
+        <div class="chat-status">Đang hoạt động</div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="empty-chat">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      <p>Gửi tin nhắn đầu tiên để bắt đầu chat!</p>
+    </div>
+  </div>
+
+  <div class="chat-input-container">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Nhập tin nhắn..." />
+    <button class="chat-send" id="sendBtn">
+      <svg class="chat-send-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Socket.IO -->
+<script src="http://localhost:4000/socket.io/socket.io.js"></script>
+
+<script>
+  // ============= CONSTANTS & GLOBALS =============
+  const API_BASE = 'http://localhost:4000/api';
+  const params = new URLSearchParams(location.search);
+  const guideId = params.get('id');
+  const locationId = params.get('locationId');
+
+  // ✅ LẤY TOKEN VÀ USER INFO
+  const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('userId');
+  const userName = localStorage.getItem('userName') || localStorage.getItem('username') || 'Bạn';
+
+  let guideData = null;
+  let socket = null;
+  let roomId = null;
+
+  // ============= DEBUG INFO =============
+  console.log('🔍 App Init:');
+  console.log('  Guide ID:', guideId);
+  console.log('  Location ID:', locationId);
+  console.log('  Token:', token ? 'EXISTS' : 'NULL');
+  console.log('  User ID:', userId);
+  console.log('  User Name:', userName);
+
+  // ============= INIT =============
+  if (userName && userName !== 'Bạn') {
+    document.getElementById('userName').textContent = userName;
+  }
+
+  // ============= LOAD GUIDE DATA =============
+  async function loadGuide() {
+    const loadingState = document.getElementById('loadingState');
+    const guideProfile = document.getElementById('guideProfile');
+
+    if (!guideId) {
+      loadingState.innerHTML = '<p style="color: var(--error);">❌ ID hướng dẫn viên không hợp lệ</p>';
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/guides/${guideId}`);
+      if (!res.ok) throw new Error('Không thể tải thông tin hướng dẫn viên');
+
+      guideData = await res.json();
+      console.log('✅ Guide data loaded:', guideData);
+
+      loadingState.style.display = 'none';
+      guideProfile.style.display = 'block';
+
+      populateProfile(guideData);
+
+      // Chỉ init chat nếu đã login
+      if (token && userId) {
+        initializeChat();
+      } else {
+        console.log('⚠️ Not logged in, chat disabled');
+      }
+
+    } catch (error) {
+      console.error('❌ Load guide error:', error);
+      loadingState.innerHTML = `<p style="color: var(--error);">❌ ${error.message}</p>`;
+    }
+  }
+
+  function populateProfile(guide) {
+    // Avatar
+    const firstLetter = (guide.user?.name || 'H').charAt(0).toUpperCase();
+    document.getElementById('profileAvatar').textContent = firstLetter;
+    document.getElementById('chatAvatar').textContent = firstLetter;
+
+    // Name & Title
+    document.getElementById('profileName').textContent = guide.user?.name || 'N/A';
+    document.getElementById('chatTitle').textContent = guide.user?.name || 'Hướng dẫn viên';
+
+    // Contact - EMAIL
+    document.getElementById('profileEmail').textContent = guide.user?.email || 'Chưa cập nhật';
+
+    // Contact - PHONE ✅ FIX
+    const phone = guide.user?.phone || guide.user?.phoneNumber || guide.phone || 'Chưa cập nhật';
+    document.getElementById('profilePhone').textContent = phone;
+    console.log('📱 Phone number:', phone);
+
+    // Bio
+    document.getElementById('profileBio').textContent = guide.bio || 'Chưa có thông tin giới thiệu.';
+
+    // Rating
+    const rating = guide.rating || 5;
+    const stars = '⭐'.repeat(Math.floor(rating));
+    document.getElementById('ratingStars').textContent = stars;
+    document.getElementById('ratingText').textContent = `${rating.toFixed(1)} / 5.0`;
+
+    // Languages
+    const languagesContainer = document.getElementById('profileLanguages');
+    languagesContainer.innerHTML = '';
+    if (guide.languages && guide.languages.length > 0) {
+      guide.languages.forEach(lang => {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = lang;
+        languagesContainer.appendChild(tag);
+      });
+    } else {
+      languagesContainer.innerHTML = '<span style="color: var(--text-light);">Chưa cập nhật</span>';
+    }
+
+    // Certifications
+    const certificationsContainer = document.getElementById('profileCertifications');
+    certificationsContainer.innerHTML = '';
+    if (guide.certifications && guide.certifications.length > 0) {
+      guide.certifications.forEach(cert => {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = cert;
+        certificationsContainer.appendChild(tag);
+      });
+    } else {
+      certificationsContainer.innerHTML = '<span style="color: var(--text-light);">Chưa có</span>';
+    }
+
+    // ✅ BOOKING BUTTON - FIX VÒNG LẶP LOGIN
+    const bookBtn = document.getElementById('bookBtn');
+    bookBtn.onclick = handleBooking;
+  }
+
+  // ============= BOOKING HANDLER - FIXED =============
+  function handleBooking(e) {
+    e.preventDefault();
+
+    console.log('🎫 Booking button clicked');
+    console.log('  Token:', token ? 'EXISTS' : 'NULL');
+    console.log('  User ID:', userId);
+    console.log('  Location ID:', locationId);
+
+    // ✅ CHECK TOKEN ĐÚNG CÁCH
+    if (!token || token === 'null' || token === 'undefined') {
+      console.log('❌ No valid token - redirecting to login');
+
+      // Lưu URL hiện tại
+      const currentUrl = window.location.href;
+      localStorage.setItem('returnUrl', currentUrl);
+
+      alert('Vui lòng đăng nhập để đặt tour!');
+      window.location.href = 'login.html';
+      return;
+    }
+
+    console.log('✅ Token OK - proceeding to booking');
+
+    // Check locationId
+    if (!locationId || locationId === 'null' || locationId === 'undefined') {
+      console.log('⚠️ No location ID');
+      alert('Vui lòng chọn địa điểm tour trước khi đặt lịch!');
+      window.location.href = 'locations.html';
+      return;
+    }
+
+    // ✅ REDIRECT BOOKING
+    const bookingUrl = `booking.html?guideId=${guideId}&locationId=${locationId}`;
+    console.log('✅ Redirecting to:', bookingUrl);
+    window.location.href = bookingUrl;
+  }
+
+  // ============= CHAT FUNCTIONS =============
+  function initializeChat() {
+    if (!userId || !guideId) {
+      console.log('⚠️ Cannot init chat: missing userId or guideId');
+      return;
+    }
+
+    // Tạo roomId
+    roomId = `user_${userId}_guide_${guideId}`;
+    console.log('💬 Chat RoomID:', roomId);
+
+    // Kết nối Socket.IO
+    try {
+      socket = io('http://localhost:4000', {
+        auth: { token },
+        transports: ['websocket', 'polling'],
+        reconnection: true
+      });
+
+      socket.on('connect', () => {
+        console.log('✅ Socket connected:', socket.id);
+        socket.emit('joinRoom', { roomId });
+      });
+
+      socket.on('connect_error', (err) => {
+        console.error('❌ Socket error:', err.message);
+      });
+
+      socket.on('chatMessage', ({ senderId, senderName, message, timestamp, _id }) => {
+        console.log('📩 Received message:', { senderId, senderName, message, _id });
+
+        // ✅ CHECK DUPLICATE
+        const messagesContainer = document.getElementById('chatMessages');
+        const existingMessage = messagesContainer.querySelector(`[data-message-id="${_id}"]`);
+
+        if (existingMessage) {
+          console.log('⚠️ Message already exists, skipping:', _id);
+          return;
+        }
+
+        const isOwn = senderId === userId;
+        appendMessage(senderName, message, timestamp, isOwn, _id);
+      });
+
+      socket.on('disconnect', () => {
+        console.log('❌ Socket disconnected');
+      });
+
+      // Load history
+      loadChatHistory();
+
+    } catch (err) {
+      console.error('❌ Socket init error:', err);
+    }
+  }
+
+  async function loadChatHistory() {
+    if (!token || !roomId) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/chat/${roomId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const messages = data.messages || [];
+
+        console.log(`📜 Loaded ${messages.length} chat messages`);
+
+        const chatMessages = document.getElementById('chatMessages');
+        chatMessages.innerHTML = '';
+
+        if (messages.length === 0) {
+          chatMessages.innerHTML = `
+            <div class="empty-chat">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <p>Gửi tin nhắn đầu tiên để bắt đầu chat!</p>
+            </div>
+          `;
+        } else {
+          messages.forEach(msg => {
+            const isOwn = msg.senderId === userId;
+            appendMessage(msg.senderName, msg.message, msg.timestamp, isOwn, msg._id);
+          });
+        }
+      }
+    } catch (err) {
+      console.error('❌ Load chat history error:', err);
+    }
+  }
+
+  function toggleChat() {
+    const chatContainer = document.getElementById('chatContainer');
+    const chatFab = document.getElementById('chatFab');
+
+    chatContainer.classList.toggle('show');
+
+    if (chatContainer.classList.contains('show')) {
+      chatFab.style.display = 'none';
+      document.getElementById('chatInput').focus();
+    } else {
+      chatFab.style.display = 'flex';
+    }
+  }
+
+  function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+
+    if (!message) {
+      console.log('⚠️ Empty message');
+      return;
+    }
+
+    if (!socket || !socket.connected) {
+      console.error('❌ Socket not connected');
+      alert('Không thể gửi tin nhắn. Vui lòng thử lại!');
+      return;
+    }
+
+    if (!roomId) {
+      console.error('❌ No roomId');
+      return;
+    }
+
+    console.log('📤 Sending message:', message);
+
+    socket.emit('chatMessage', {
+      roomId,
+      senderId: userId,
+      senderName: userName,
+      message
+    });
+
+    input.value = '';
+  }
+
+  function appendMessage(senderName, message, timestamp, isOwn = false, messageId = null) {
+    const messagesContainer = document.getElementById('chatMessages');
+
+    // Remove empty state
+    const emptyChat = messagesContainer.querySelector('.empty-chat');
+    if (emptyChat) {
+      emptyChat.remove();
+    }
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${isOwn ? 'own' : 'other'}`;
+    if (messageId) {
+      messageDiv.setAttribute('data-message-id', messageId);
+    }
+
+    const time = timestamp
+            ? new Date(timestamp).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
+            : '';
+
+    messageDiv.innerHTML = `
+      ${!isOwn ? `<div class="message-sender">${escapeHtml(senderName)}</div>` : ''}
+      <div class="message-bubble">${escapeHtml(message)}</div>
+      ${time ? `<div class="message-time">${time}</div>` : ''}
+    `;
+
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    console.log('✅ Message appended to UI');
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // ============= EVENT LISTENERS =============
+  document.getElementById('sendBtn').addEventListener('click', sendMessage);
+
+  document.getElementById('chatInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // ============= INITIALIZE APP =============
+  loadGuide();
+</script>
+</body>
+</html>

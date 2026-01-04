@@ -1,0 +1,494 @@
+[{
+  "_id": {
+    "$oid": "683d761e8a8e5775a8301e5f"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "683d6cc9f8ccfa913ec86495"
+  },
+  "date": {
+    "$date": "2025-06-25T00:00:00.000Z"
+  },
+  "timeSlot": "10:30-12:30",
+  "status": "confirmed",
+  "location": {
+    "$oid": "682f39ca6a5a0b1d52973637"
+  },
+  "createdAt": {
+    "$date": "2025-06-02T09:59:58.589Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683d76658a8e5775a8301e73"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "682f39ca6a5a0b1d52973640"
+  },
+  "date": {
+    "$date": "2025-06-19T00:00:00.000Z"
+  },
+  "timeSlot": "13:00-15:00",
+  "status": "confirmed",
+  "location": {
+    "$oid": "682f40ca779b9556818120e1"
+  },
+  "createdAt": {
+    "$date": "2025-06-02T10:01:09.041Z"
+  },
+  "__v": 0,
+  "paymentStatus": "paid"
+},
+{
+  "_id": {
+    "$oid": "683d789803e341aae404a47a"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "682f39ca6a5a0b1d52973640"
+  },
+  "date": {
+    "$date": "2025-06-19T00:00:00.000Z"
+  },
+  "timeSlot": "13:00-15:00",
+  "status": "confirmed",
+  "location": {
+    "$oid": "682f40ca779b9556818120e1"
+  },
+  "createdAt": {
+    "$date": "2025-06-02T10:10:32.458Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683d78b403e341aae404a494"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "682f39ca6a5a0b1d52973640"
+  },
+  "date": {
+    "$date": "2025-04-11T00:00:00.000Z"
+  },
+  "timeSlot": "10:30-12:30",
+  "status": "confirmed",
+  "location": {
+    "$oid": "682f40ca779b9556818120e1"
+  },
+  "createdAt": {
+    "$date": "2025-06-02T10:11:00.087Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683d929457683b8c935f04f1"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "683d6cc9f8ccfa913ec86495"
+  },
+  "date": {
+    "$date": "2025-04-16T00:00:00.000Z"
+  },
+  "timeSlot": "08:00-10:00",
+  "status": "confirmed",
+  "location": {
+    "$oid": "682f39ca6a5a0b1d52973637"
+  },
+  "createdAt": {
+    "$date": "2025-06-02T12:01:24.525Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683d92b357683b8c935f051c"
+  },
+  "user": {
+    "$oid": "682707af381908746807a599"
+  },
+  "guide": {
+    "$oid": "683d6cc9f8ccfa913ec86495"
+  },
+  "date": {
+    "$date": "2025-04-16T00:00:00.000Z"
+  },
+  "timeSlot": "08:00-10:00",
+  "status": "cancelled",
+  "location": {
+    "$oid": "682f39ca6a5a0b1d52973637"
+  },
+  "createdAt": {
+    "$date": "2025-06-02T12:01:55.577Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683dce168ffb69dd257c24a0"
+  },
+  "user": {
+    "$oid": "683dc8890dbef607f1b095bf"
+  },
+  "guide": {
+    "$oid": "683dc8890dbef607f1b095c1"
+  },
+  "date": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "timeSlot": "10:30-12:30",
+  "status": "confirmed",
+  "location": {
+    "$oid": "682f40e2779b9556818120eb"
+  },
+  "createdAt": {
+    "$date": "2025-06-02T16:15:18.453Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683dce9a8ffb69dd257c24fb"
+  },
+  "user": {
+    "$oid": "682707af381908746807a599"
+  },
+  "guide": {
+    "$oid": "683dc8890dbef607f1b095c1"
+  },
+  "date": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "timeSlot": "10:30-12:30",
+  "status": "cancelled",
+  "location": {
+    "$oid": "682f40e2779b9556818120eb"
+  },
+  "createdAt": {
+    "$date": "2025-06-02T16:17:30.737Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683dde1f9b6d066515e3980b"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "683dc8890dbef607f1b095c1"
+  },
+  "date": {
+    "$date": "2025-06-18T00:00:00.000Z"
+  },
+  "timeSlot": "10:30-12:30",
+  "status": "confirmed",
+  "location": {
+    "$oid": "682f40e2779b9556818120eb"
+  },
+  "createdAt": {
+    "$date": "2025-06-02T17:23:43.733Z"
+  },
+  "__v": 0,
+  "paymentStatus": "paid"
+},
+{
+  "_id": {
+    "$oid": "683eb0dafaa51735c030cef2"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "683d6cc9f8ccfa913ec86495"
+  },
+  "date": {
+    "$date": "2025-06-19T00:00:00.000Z"
+  },
+  "timeSlot": "10:30-12:30",
+  "status": "confirmed",
+  "location": {
+    "$oid": "682f40e2779b9556818120eb"
+  },
+  "createdAt": {
+    "$date": "2025-06-03T08:22:50.471Z"
+  },
+  "__v": 0,
+  "paymentStatus": "paid"
+},
+{
+  "_id": {
+    "$oid": "683eb4afe4d3ed18fa08e93b"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "683dc8890dbef607f1b095c1"
+  },
+  "date": {
+    "$date": "2025-04-08T00:00:00.000Z"
+  },
+  "timeSlot": "08:00-10:00",
+  "status": "confirmed",
+  "location": {
+    "$oid": "682f40e2779b9556818120eb"
+  },
+  "createdAt": {
+    "$date": "2025-06-03T08:39:11.308Z"
+  },
+  "__v": 0,
+  "paymentStatus": "paid"
+},
+{
+  "_id": {
+    "$oid": "683eb5a8e4d3ed18fa08e980"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "683d6cc9f8ccfa913ec86495"
+  },
+  "date": {
+    "$date": "2025-06-18T00:00:00.000Z"
+  },
+  "timeSlot": "13:00-15:00",
+  "status": "confirmed",
+  "location": {
+    "$oid": "682f40e2779b9556818120eb"
+  },
+  "createdAt": {
+    "$date": "2025-06-03T08:43:20.517Z"
+  },
+  "__v": 0,
+  "paymentStatus": "paid"
+},
+{
+  "_id": {
+    "$oid": "683ece23b26d0ffa50532ebd"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "683d6cc9f8ccfa913ec86495"
+  },
+  "date": {
+    "$date": "2025-06-23T00:00:00.000Z"
+  },
+  "timeSlot": "13:00-15:00",
+  "status": "confirmed",
+  "location": {
+    "$oid": "682f40e2779b9556818120eb"
+  },
+  "createdAt": {
+    "$date": "2025-06-03T10:27:47.880Z"
+  },
+  "__v": 0,
+  "paymentStatus": "paid"
+},
+{
+  "_id": {
+    "$oid": "683f0ffdafca64e660483be2"
+  },
+  "user": {
+    "$oid": "682707af381908746807a599"
+  },
+  "guide": {
+    "$oid": "683dc8890dbef607f1b095c1"
+  },
+  "date": {
+    "$date": "2025-06-23T00:00:00.000Z"
+  },
+  "timeSlot": "10:30-12:30",
+  "status": "confirmed",
+  "location": {
+    "$oid": "683f07bfb5f8fca270bd7b84"
+  },
+  "createdAt": {
+    "$date": "2025-06-03T15:08:45.740Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f153ae6883409a4d70fb1"
+  },
+  "user": {
+    "$oid": "683ecdc3e5d949e65e562761"
+  },
+  "guide": {
+    "$oid": "683ecdc3e5d949e65e562763"
+  },
+  "date": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "timeSlot": "08:00-10:00",
+  "status": "confirmed",
+  "location": {
+    "$oid": "683f10a784a2b70e4cfa32e5"
+  },
+  "createdAt": {
+    "$date": "2025-06-03T15:31:06.103Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f158527a18aa3c4b1f707"
+  },
+  "user": {
+    "$oid": "683f1490e6883409a4d70f93"
+  },
+  "guide": {
+    "$oid": "683ecdc3e5d949e65e562763"
+  },
+  "date": {
+    "$date": "2025-06-26T00:00:00.000Z"
+  },
+  "timeSlot": "13:00-15:00",
+  "status": "confirmed",
+  "location": {
+    "$oid": "683f10a784a2b70e4cfa32e5"
+  },
+  "createdAt": {
+    "$date": "2025-06-03T15:32:21.721Z"
+  },
+  "__v": 0,
+  "paymentStatus": "paid"
+},
+{
+  "_id": {
+    "$oid": "683f28952b59bc468d19b26b"
+  },
+  "user": {
+    "$oid": "682707af381908746807a599"
+  },
+  "guide": {
+    "$oid": "683f14cee6883409a4d70f98"
+  },
+  "date": {
+    "$date": "2025-06-17T00:00:00.000Z"
+  },
+  "timeSlot": "13:00-15:00",
+  "status": "confirmed",
+  "location": {
+    "$oid": "683f28732b59bc468d19b250"
+  },
+  "createdAt": {
+    "$date": "2025-06-03T16:53:41.045Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6840122bec12444f2612511d"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "683f14cee6883409a4d70f98"
+  },
+  "date": {
+    "$date": "2025-06-26T00:00:00.000Z"
+  },
+  "timeSlot": "10:30-12:30",
+  "status": "confirmed",
+  "location": {
+    "$oid": "683f28732b59bc468d19b250"
+  },
+  "paymentStatus": "paid",
+  "createdAt": {
+    "$date": "2025-06-04T09:30:19.995Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6840130dcc090b97c68ad702"
+  },
+  "user": {
+    "$oid": "682707af381908746807a599"
+  },
+  "guide": {
+    "$oid": "683f14cee6883409a4d70f98"
+  },
+  "date": {
+    "$date": "2025-06-16T00:00:00.000Z"
+  },
+  "timeSlot": "10:30-12:30",
+  "status": "pending",
+  "location": {
+    "$oid": "683f28732b59bc468d19b250"
+  },
+  "paymentStatus": "unpaid",
+  "createdAt": {
+    "$date": "2025-06-04T09:34:05.360Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68401335cc090b97c68ad72e"
+  },
+  "user": {
+    "$oid": "6825ff81ca51616192c369d0"
+  },
+  "guide": {
+    "$oid": "683ecdc3e5d949e65e562763"
+  },
+  "date": {
+    "$date": "2025-06-04T00:00:00.000Z"
+  },
+  "timeSlot": "13:00-15:00",
+  "status": "confirmed",
+  "location": {
+    "$oid": "683f28732b59bc468d19b250"
+  },
+  "paymentStatus": "unpaid",
+  "createdAt": {
+    "$date": "2025-06-04T09:34:45.158Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68403e097fef9bb9d271879d"
+  },
+  "user": {
+    "$oid": "683f14cee6883409a4d70f96"
+  },
+  "guide": {
+    "$oid": "683f14cee6883409a4d70f98"
+  },
+  "date": {
+    "$date": "2025-04-10T00:00:00.000Z"
+  },
+  "timeSlot": "10:30-12:30",
+  "status": "confirmed",
+  "location": {
+    "$oid": "683f28732b59bc468d19b250"
+  },
+  "paymentStatus": "paid",
+  "createdAt": {
+    "$date": "2025-06-04T12:37:29.913Z"
+  },
+  "__v": 0
+}]

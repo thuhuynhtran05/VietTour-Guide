@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour của tôi | VietTour Guide</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <style>
+    :root {
+      --primary: #FDB813;
+      --success: #10b981;
+      --text-dark: #1f2937;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      min-height: 100vh;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)),
+      url('https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070') center/cover no-repeat;
+      z-index: -2;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 100%);
+      z-index: -1;
+    }
+
+    header {
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* ✅ Logo mới */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.02);
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: #FFC107;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(255,193,7,0.3);
+    }
+
+    .logo-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: #1a202c;
+      stroke-width: 2.5;
+    }
+
+    .logo-text {
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .nav-link.active {
+      background: rgba(255,255,255,0.25);
+    }
+
+    main {
+      padding: 2rem 1rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: white;
+      text-align: center;
+    }
+
+    .page-description {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.125rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .bookings-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .booking-card {
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.15);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .booking-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .booking-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .booking-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.25rem;
+    }
+
+    .booking-category {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.875rem;
+    }
+
+    .booking-body {
+      padding: 1.5rem;
+    }
+
+    .booking-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-item {
+      color: white;
+    }
+
+    .detail-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-value {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .price {
+      font-size: 1.25rem;
+      color: #10b981;
+      font-weight: 800;
+    }
+
+    .booking-status {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: rgba(16,185,129,0.3);
+      color: #10b981;
+      border: 1px solid rgba(16,185,129,0.5);
+    }
+
+    .loading, .empty-state, .error-state {
+      text-align: center;
+      padding: 4rem 1rem;
+      color: white;
+    }
+
+    .spinner {
+      width: 2rem;
+      height: 2rem;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .empty-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, #FDB813 0%, #F7931E 100%);
+      color: #000;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .page-title { font-size: 1.75rem; }
+      .booking-details { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <span class="logo-text">VietTour Guide</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Trang chủ</a>
+        <a href="locations.html" class="nav-link">Địa điểm</a>
+        <a href="my-bookings.html" class="nav-link active">Tour của tôi</a>
+        <span id="userName" style="color: white; font-weight: 600;">Khách hàng</span>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1 class="page-title">Tour đã thanh toán</h1>
+    <p class="page-description">Danh sách các tour bạn đã đặt và thanh toán thành công</p>
+
+    <div id="loadingState" class="loading">
+      <div class="spinner"></div>
+      <p>Đang tải...</p>
+    </div>
+
+    <div id="errorState" class="error-state" style="display: none;">
+      <div class="empty-icon">❌</div>
+      <h3 class="empty-title">Lỗi tải dữ liệu</h3>
+      <p id="errorMessage"></p>
+    </div>
+
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <div class="empty-icon">📅</div>
+      <h3 class="empty-title">Chưa có tour nào</h3>
+      <p>Bạn chưa có tour đã thanh toán. Hãy khám phá và đặt tour ngay!</p>
+      <a href="locations.html" class="btn">Khám phá địa điểm</a>
+    </div>
+
+    <div id="bookingsGrid" class="bookings-grid"></div>
+  </div>
+</main>
+
+<script>
+  const API_BASE = 'http://localhost:4000/api';
+  const token = localStorage.getItem('token');
+  const userName = localStorage.getItem('userName');
+
+  if (!token) {
+    alert('Vui lòng đăng nhập');
+    location.href = 'login.html';
+  }
+
+  if (userName) {
+    document.getElementById('userName').textContent = userName;
+  }
+
+  function formatVND(amount) {
+    return new Intl.NumberFormat('vi-VN').format(amount) + ' đ';
+  }
+
+  function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('vi-VN', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
+  function renderBookings(bookings) {
+    const grid = document.getElementById('bookingsGrid');
+    grid.innerHTML = '';
+
+    bookings.forEach(booking => {
+      console.log('📦 Booking data:', booking);
+      console.log('👤 Guide data:', booking.guide);
+
+      const location = booking.location || {};
+      const guide = booking.guide?.user || booking.guide || {};
+
+      console.log('✅ Final guide:', guide);
+
+      const card = document.createElement('div');
+      card.className = 'booking-card';
+
+      card.innerHTML = `
+          <div class="booking-header">
+            <div class="booking-title">${location.name || 'Địa điểm'}</div>
+            <div class="booking-category">📍 ${location.category || 'Tour'}</div>
+          </div>
+
+          <div class="booking-body">
+            <div class="booking-details">
+              <div class="detail-item">
+                <div class="detail-label">Hướng dẫn viên</div>
+                <div class="detail-value">${guide.name || 'Chưa có'}</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Ngày đi</div>
+                <div class="detail-value">${formatDate(booking.date)}</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Khung giờ</div>
+                <div class="detail-value">${booking.timeSlot || 'Chưa xác định'}</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Số khách</div>
+                <div class="detail-value">${booking.guests || 1} người</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Tổng giá</div>
+                <div class="detail-value price">${formatVND(booking.price || booking.total || 0)}</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Trạng thái</div>
+                <div class="booking-status">✅ Đã thanh toán</div>
+              </div>
+            </div>
+          </div>
+        `;
+
+      grid.appendChild(card);
+    });
+  }
+
+  async function loadBookings() {
+    try {
+      console.log('📡 Fetching bookings...');
+
+      const res = await fetch(`${API_BASE}/bookings/my`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log('Response status:', res.status);
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({ message: res.statusText }));
+        throw new Error(errorData.message || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log('✅ Response data:', data);
+
+      document.getElementById('loadingState').style.display = 'none';
+
+      const bookings = data.bookings || data || [];
+
+      if (!Array.isArray(bookings) || bookings.length === 0) {
+        document.getElementById('emptyState').style.display = 'block';
+        return;
+      }
+
+      renderBookings(bookings);
+
+    } catch (error) {
+      console.error('❌ Error:', error);
+      document.getElementById('loadingState').style.display = 'none';
+      document.getElementById('errorState').style.display = 'block';
+      document.getElementById('errorMessage').textContent = error.message;
+    }
+  }
+
+  loadBookings();
+</script>
+</body>
+</html>

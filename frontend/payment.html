@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thanh toán tour | VietTour Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #f59e0b;
+      --primary-hover: #d97706;
+      --secondary: #2563eb;
+      --success: #10b981;
+      --error: #ef4444;
+      --text-dark: #1f2937;
+      --text-medium: #6b7280;
+      --border: #e5e7eb;
+      --bg-light: #f9fafb;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background: var(--bg-light);
+      min-height: 100vh;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .header-content {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .logo-icon {
+      color: var(--primary);
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-medium);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .nav-link:hover {
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    .user-info {
+      padding: 8px 16px;
+      background: var(--bg-light);
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    .btn-logout {
+      padding: 8px 20px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .btn-logout:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    main {
+      padding: 40px 0 80px;
+    }
+
+    .payment-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 0.875rem;
+      color: var(--text-medium);
+    }
+
+    .breadcrumb a {
+      color: var(--text-medium);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .page-title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      color: var(--text-dark);
+    }
+
+    .payment-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-light);
+    }
+
+    .card-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .card-body {
+      padding: 24px;
+    }
+
+    .payment-methods {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .payment-method:hover {
+      border-color: var(--primary);
+      background: #fffbeb;
+    }
+
+    .payment-method.selected {
+      border-color: var(--primary);
+      background: #fffbeb;
+    }
+
+    .payment-method input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    .method-info {
+      flex: 1;
+    }
+
+    .method-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+
+    .method-desc {
+      font-size: 0.825rem;
+      color: var(--text-medium);
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--primary);
+      color: white;
+      transition: all 0.2s;
+    }
+
+    .submit-button:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .submit-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 0.9rem;
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .summary-label {
+      color: var(--text-medium);
+    }
+
+    .summary-value {
+      font-weight: 600;
+      color: var(--text-dark);
+      text-align: right;
+    }
+
+    .summary-total {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .summary-total-label {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .summary-total-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .alert {
+      padding: 14px 16px;
+      border-radius: 10px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .alert-success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #10b981;
+    }
+
+    .alert-error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #ef4444;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-medium);
+    }
+
+    .spinner {
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid #e5e7eb;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .payment-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .order-summary {
+        order: -1;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .page-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span>VietTour Guide</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Trang chủ</a>
+        <a href="locations.html" class="nav-link">Tính năng</a>
+        <a href="locations.html" class="nav-link">Bản đồ</a>
+        <a href="my-bookings.html" class="nav-link">Điểm đến</a>
+        <div class="user-info" id="userName">Khách hàng</div>
+        <button class="btn-logout">Đăng xuất</button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="payment-container">
+      <div class="breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <span>/</span>
+        <a href="my-bookings.html">Đặt tour</a>
+        <span>/</span>
+        <span>Thanh toán</span>
+      </div>
+
+      <h1 class="page-title">Thanh toán tour</h1>
+
+      <div id="loadingState" class="loading">
+        <div class="spinner"></div>
+        Đang tải thông tin...
+      </div>
+
+      <div id="paymentLayout" class="payment-layout" style="display:none;">
+
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Phương thức thanh toán</h2>
+            </div>
+            <div class="card-body">
+              <div class="payment-methods">
+                <label class="payment-method" data-method="banking">
+                  <input type="radio" name="method" value="banking">
+                  <div class="method-info">
+                    <div class="method-name">Chuyển khoản ngân hàng</div>
+                    <div class="method-desc">Thanh toán trực tiếp từ tài khoản ngân hàng</div>
+                  </div>
+                </label>
+
+                <label class="payment-method" data-method="paypal">
+                  <input type="radio" name="method" value="paypal">
+                  <div class="method-info">
+                    <div class="method-name">PayPal</div>
+                    <div class="method-desc">Thanh toán quốc tế an toàn, bảo mật</div>
+                  </div>
+                </label>
+
+                <label class="payment-method" data-method="cash">
+                  <input type="radio" name="method" value="cash">
+                  <div class="method-info">
+                    <div class="method-name">Tiền mặt</div>
+                    <div class="method-desc">Thanh toán khi gặp hướng dẫn viên</div>
+                  </div>
+                </label>
+              </div>
+
+              <button class="submit-button" id="payBtn">
+                Xác nhận thanh toán
+              </button>
+
+              <div id="message"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-summary">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Chi tiết đơn hàng</h3>
+            </div>
+            <div class="card-body" id="orderSummary">
+              <!-- Will be filled by JS -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  const API_BASE = 'http://localhost:4000/api';
+  const token = localStorage.getItem('token');
+  const userName = localStorage.getItem('userName');
+  const params = new URLSearchParams(window.location.search);
+
+  if (!token) {
+    alert('Vui lòng đăng nhập');
+    location.href = 'login.html';
+  }
+
+  if (userName) {
+    document.getElementById('userName').textContent = userName;
+  }
+
+  // Get booking data from URL
+  const bookingData = {
+    locationId: params.get('locationId'),
+    guideId: params.get('guideId'),
+    date: params.get('date'),
+    timeSlot: params.get('timeSlot'),
+    guests: parseInt(params.get('guests')) || 1,
+    total: parseFloat(params.get('total')) || 0,
+    phone: params.get('phone') || '',
+    notes: params.get('notes') || ''
+  };
+
+  console.log('Booking data:', bookingData);
+
+  function formatVND(amount) {
+    return new Intl.NumberFormat('vi-VN').format(amount) + ' đ';
+  }
+
+  function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('vi-VN', options);
+  }
+
+  function showMessage(msg, type = 'success') {
+    const msgEl = document.getElementById('message');
+    msgEl.className = `alert alert-${type}`;
+    msgEl.textContent = msg;
+  }
+
+  // Load order summary
+  async function loadOrderSummary() {
+    try {
+      // Fetch location details
+      const locRes = await fetch(`${API_BASE}/locations/${bookingData.locationId}`);
+      const locData = await locRes.json();
+      const location = locData.location || locData;
+
+      // Fetch guide details
+      const guideRes = await fetch(`${API_BASE}/guides/${bookingData.guideId}`);
+      const guide = await guideRes.json();
+
+      const pricePerPerson = location.price || 0;
+      const totalPrice = pricePerPerson * bookingData.guests;
+
+      document.getElementById('orderSummary').innerHTML = `
+        <div class="summary-item">
+          <span class="summary-label">Địa điểm:</span>
+          <span class="summary-value">${location.name}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Danh mục:</span>
+          <span class="summary-value">${location.category || 'N/A'}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Hướng dẫn viên:</span>
+          <span class="summary-value">${guide.user?.name || 'N/A'}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Email HDV:</span>
+          <span class="summary-value">${guide.user?.email || 'N/A'}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Ngôn ngữ:</span>
+          <span class="summary-value">${guide.languages?.join(', ') || 'Tiếng Việt'}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Ngày đi:</span>
+          <span class="summary-value">${formatDate(bookingData.date)}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Khung giờ:</span>
+          <span class="summary-value">${bookingData.timeSlot}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Số khách:</span>
+          <span class="summary-value">${bookingData.guests} người</span>
+        </div>
+        ${bookingData.phone ? `
+        <div class="summary-item">
+          <span class="summary-label">Số điện thoại:</span>
+          <span class="summary-value">${bookingData.phone}</span>
+        </div>
+        ` : ''}
+        <div class="summary-item">
+          <span class="summary-label">Giá/người:</span>
+          <span class="summary-value">${formatVND(pricePerPerson)}</span>
+        </div>
+        <div class="summary-total">
+          <span class="summary-total-label">Tổng thanh toán:</span>
+          <span class="summary-total-value">${formatVND(totalPrice)}</span>
+        </div>
+      `;
+
+      document.getElementById('loadingState').style.display = 'none';
+      document.getElementById('paymentLayout').style.display = 'grid';
+
+    } catch (error) {
+      console.error('Load error:', error);
+      document.getElementById('loadingState').innerHTML = `
+        <div style="color: #ef4444; padding: 20px; text-align: center;">
+          Lỗi tải thông tin: ${error.message}
+        </div>
+      `;
+    }
+  }
+
+  // Payment method selection
+  document.querySelectorAll('.payment-method').forEach(method => {
+    method.addEventListener('click', function() {
+      document.querySelectorAll('.payment-method').forEach(m => {
+        m.classList.remove('selected');
+      });
+      this.classList.add('selected');
+      this.querySelector('input[type="radio"]').checked = true;
+    });
+  });
+
+  // Submit payment
+  document.getElementById('payBtn').addEventListener('click', async () => {
+    const selectedMethod = document.querySelector('input[name="method"]:checked');
+
+    if (!selectedMethod) {
+      showMessage('Vui lòng chọn phương thức thanh toán', 'error');
+      return;
+    }
+
+    const payBtn = document.getElementById('payBtn');
+    payBtn.disabled = true;
+    payBtn.innerHTML = '<div class="spinner"></div> Đang xử lý...';
+
+    try {
+      const payload = {
+        ...bookingData,
+        method: selectedMethod.value
+      };
+
+      console.log('Sending payment:', payload);
+
+      const res = await fetch(`${API_BASE}/payment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+      console.log('Response:', data);
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || 'Thanh toán thất bại');
+      }
+
+      showMessage(data.message, 'success');
+
+      setTimeout(() => {
+        window.location.href = 'my-bookings.html';
+      }, 2000);
+
+    } catch (error) {
+      console.error('Payment error:', error);
+      showMessage(error.message, 'error');
+      payBtn.disabled = false;
+      payBtn.innerHTML = 'Xác nhận thanh toán';
+    }
+  });
+
+  loadOrderSummary();
+</script>
+
+</body>
+</html>

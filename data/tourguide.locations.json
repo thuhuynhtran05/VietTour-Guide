@@ -1,0 +1,263 @@
+[{
+  "_id": {
+    "$oid": "682f40ca779b9556818120e1"
+  },
+  "name": "Sai Gon",
+  "description": "Qua dep",
+  "imageUrl": "https://images.pexels.com/photos/28119463/pexels-photo-28119463/free-photo-of-nhi-p-nh-d-ng-ph.jpeg",
+  "category": "Thanh Thi",
+  "createdAt": {
+    "$date": "2025-05-22T15:20:42.101Z"
+  },
+  "updatedAt": {
+    "$date": "2025-05-22T15:20:42.101Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682f40e2779b9556818120eb"
+  },
+  "name": "Sai Gon",
+  "description": "Qua dep",
+  "imageUrl": "https://images.pexels.com/photos/28119463/pexels-photo-28119463/free-photo-of-nhi-p-nh-d-ng-ph.jpeg",
+  "category": "Thanh Thi",
+  "createdAt": {
+    "$date": "2025-05-22T15:21:06.926Z"
+  },
+  "updatedAt": {
+    "$date": "2025-05-22T15:21:06.926Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682f4188779b9556818120f5"
+  },
+  "name": "Sai Gon",
+  "description": "Qua dep",
+  "imageUrl": "https://images.pexels.com/photos/28119463/pexels-photo-28119463/free-photo-of-nhi-p-nh-d-ng-ph.jpeg",
+  "category": "Thanh Thi",
+  "createdAt": {
+    "$date": "2025-05-22T15:23:52.238Z"
+  },
+  "updatedAt": {
+    "$date": "2025-05-22T15:23:52.238Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "682f41de779b95568181210f"
+  },
+  "name": "Hoi An",
+  "description": "Pho Co",
+  "imageUrl": "https://images.pexels.com/photos/28119463/pexels-photo-28119463/free-photo-of-nhi-p-nh-d-ng-ph.jpeg",
+  "category": "Lich Su",
+  "createdAt": {
+    "$date": "2025-05-22T15:25:18.224Z"
+  },
+  "updatedAt": {
+    "$date": "2025-05-22T15:25:18.224Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683effb0d8c84ee818f4996f"
+  },
+  "name": "Hà Nội",
+  "images": [],
+  "createdAt": {
+    "$date": "2025-06-03T13:59:12.528Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-03T13:59:12.528Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f01e6493b46a993fd1c58"
+  },
+  "name": "Ha Noi",
+  "description": "Thu Do",
+  "category": "Thanh Thi",
+  "images": [
+    "/uploads/1748959718300-images.jpg"
+  ],
+  "createdAt": {
+    "$date": "2025-06-03T14:08:38.337Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-03T14:08:38.337Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f0215493b46a993fd1c5f"
+  },
+  "name": "Thua Thue Hue",
+  "description": "Co Do",
+  "category": "Thanh Thi",
+  "images": [
+    "/uploads/1748959765309-images.jpg"
+  ],
+  "createdAt": {
+    "$date": "2025-06-03T14:09:25.369Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-03T14:09:25.369Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f0257493b46a993fd1c74"
+  },
+  "name": "Quan",
+  "description": "",
+  "category": "",
+  "images": [],
+  "createdAt": {
+    "$date": "2025-06-03T14:10:31.115Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-03T14:10:31.115Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f0262493b46a993fd1c78"
+  },
+  "name": "Quang Nam",
+  "description": "Bien",
+  "category": "Biển ",
+  "images": [
+    "/uploads/1748959842108-images.jpg",
+    "/uploads/1748959842156-images.jpg",
+    "/uploads/1748959842173-images.jpg",
+    "/uploads/1748959842264-images.jpg",
+    "/uploads/1748959842323-images.jpg"
+  ],
+  "createdAt": {
+    "$date": "2025-06-03T14:10:42.416Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-03T14:10:42.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f07bfb5f8fca270bd7b84"
+  },
+  "name": "Ha Noi 1",
+  "description": "SDSAD",
+  "category": "DSDSAD",
+  "images": [
+    "/uploads/1748961215694-images.jpg",
+    "/uploads/1748961215696-images.jpg",
+    "/uploads/1748961215785-images.jpg",
+    "/uploads/1748961215802-images.jpg"
+  ],
+  "createdAt": {
+    "$date": "2025-06-03T14:33:35.861Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-03T14:33:35.861Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f10a784a2b70e4cfa32e5"
+  },
+  "name": "Paris",
+  "description": "Thu Do nuoc Phap",
+  "category": "Quoc Te",
+  "images": [
+    "/uploads/1748963495560-images.jpg",
+    "/uploads/1748963495561-images.jpg",
+    "/uploads/1748963495612-images.jpg",
+    "/uploads/1748963495628-images.jpg",
+    "/uploads/1748963495657-images.jpg",
+    "/uploads/1748963495672-images.jpg",
+    "/uploads/1748963495706-images.jpg",
+    "/uploads/1748963495741-images.jpg"
+  ],
+  "createdAt": {
+    "$date": "2025-06-03T15:11:35.759Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-03T15:11:35.759Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f284b2b59bc468d19b247"
+  },
+  "name": "Sai Gon 1",
+  "description": "Thanh pho",
+  "category": "Thanh Thi",
+  "images": [
+    "/uploads/1748969546675-images.jpg",
+    "/uploads/1748969546678-images.jpg",
+    "/uploads/1748969546788-images.jpg",
+    "/uploads/1748969546835-images.jpg",
+    "/uploads/1748969546910-images.jpg",
+    "/uploads/1748969546940-images.jpg"
+  ],
+  "createdAt": {
+    "$date": "2025-06-03T16:52:27.049Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-03T16:52:27.049Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "683f28732b59bc468d19b250"
+  },
+  "name": "Sai Gon 2",
+  "description": "Sai gon",
+  "category": "123",
+  "images": [
+    "/uploads/1748969587439-images.jpg",
+    "/uploads/1748969587517-images.jpg",
+    "/uploads/1748969587559-images.jpg",
+    "/uploads/1748969587591-images.jpg"
+  ],
+  "createdAt": {
+    "$date": "2025-06-03T16:53:07.666Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-03T16:53:07.666Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68403efbe04591cab0b77ed6"
+  },
+  "name": "Hoi An 1",
+  "description": "123",
+  "category": "12345",
+  "images": [
+    "/uploads/1749040890680-images.jpg",
+    "/uploads/1749040890749-images.jpg",
+    "/uploads/1749040891009-images.jpg",
+    "/uploads/1749040891205-images.jpg"
+  ],
+  "createdAt": {
+    "$date": "2025-06-04T12:41:31.324Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-04T12:41:31.324Z"
+  },
+  "__v": 0
+}]

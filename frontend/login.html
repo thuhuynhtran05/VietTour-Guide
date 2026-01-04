@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng nhập | VietTour Guide</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+  <style>
+    :root {
+      --primary: #FFC107;
+      --primary-hover: #FFB300;
+      --primary-light: #fffbf0;
+      --success: #10b981;
+      --error: #ef4444;
+      --text-dark: #1f2937;
+      --text-medium: #6b7280;
+      --text-light: #9ca3af;
+      --border: #e5e7eb;
+      --white: #ffffff;
+      --yellow: #FFC107;
+      --dark-bg: #1a202c;
+      --shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+      --shadow-lg: 0 25px 50px -12px rgba(0,0,0,0.25);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      line-height:1.5;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+  /* Animated Background - Tone gradient tím xanh */
+/* 🌄 Background hình + overlay mờ đẹp */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: 
+      linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.4)),
+      url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2000&q=80");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+/* lớp glass nhẹ để nổi khối card */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  z-index: -1;
+}
+
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes floatingOrbs {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+      33% { transform: translate(30px, -30px) scale(1.1); opacity: 1; }
+      66% { transform: translate(-20px, 20px) scale(0.9); opacity: 0.9; }
+    }
+
+    /* Glass Morphism Header */
+    header {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(255,193,7,0.3);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      animation: slideDown 0.5s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: white;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover { transform: scale(1.05); }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(255,193,7,0.4);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 8px 20px rgba(255,193,7,0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 12px 30px rgba(255,193,7,0.6); }
+    }
+
+    .logo-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: #1a202c;
+    }
+
+    .logo-text {
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,193,7,0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .nav-link:hover::before { left: 100%; }
+
+    .nav-link:hover {
+      background: rgba(255,193,7,0.2);
+      color: #FFC107;
+      transform: translateY(-2px);
+    }
+
+    /* Main Content */
+    main {
+      flex:1;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:2rem 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-container { 
+      width:100%; 
+      max-width:420px;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255,193,7,0.3);
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 60px -12px rgba(0,0,0,0.35);
+    }
+
+    .card-header { 
+      padding:2.5rem 2rem 1.5rem; 
+      text-align:center;
+      position: relative;
+      background: linear-gradient(135deg, rgba(255,193,7,0.1) 0%, transparent 100%);
+    }
+
+    .card-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #FFC107, transparent);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .logo-container {
+      width: 4.5rem;
+      height: 4.5rem;
+      background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 10px 30px rgba(255,193,7,0.4);
+      animation: iconFloat 3s ease-in-out infinite;
+      position: relative;
+    }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .logo-container::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+      opacity: 0.5;
+      filter: blur(20px);
+      z-index: -1;
+    }
+
+    .logo-container svg { stroke: #1a202c; }
+
+    .card-title { 
+      font-size: 1.75rem; 
+      font-weight: 800; 
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-description { 
+      font-size: 0.95rem; 
+      color: #4a5568;
+    }
+
+    .card-content { padding: 0 2rem 2.5rem; }
+
+    .form-group { margin-bottom: 1.5rem; }
+    
+    .form-label { 
+      font-size: 0.9rem; 
+      font-weight: 600; 
+      color: #2d3748;
+      margin-bottom: 0.5rem; 
+      display: block;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 0.875rem 1.125rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 0.9375rem;
+      background: white;
+      color: #1a202c;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .form-input::placeholder {
+      color: #a0aec0;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #FFC107;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(255,193,7,0.15);
+      transform: translateY(-2px);
+    }
+
+    .password-container { position: relative; }
+    
+    .password-toggle {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #718096;
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: all 0.3s ease;
+      padding: 0.25rem;
+    }
+
+    .password-toggle:hover {
+      color: #FFC107;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .btn {
+      width: 100%;
+      background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+      border: none;
+      padding: 1rem;
+      border-radius: 12px;
+      color: #1a202c;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+      box-shadow: 0 8px 20px rgba(255,193,7,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .btn:active::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn:hover { 
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(255,193,7,0.6);
+      background: linear-gradient(135deg, #FFB300 0%, #FFA000 100%);
+    }
+    
+    .btn:disabled { 
+      opacity: 0.7; 
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    #message { 
+      margin-top: 1rem; 
+      font-size: 0.9rem; 
+      padding: 1rem 1.25rem; 
+      border-radius: 12px; 
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 600;
+      animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(10px);
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    #message.success { 
+      background: rgba(209,250,229,0.9); 
+      border: 1px solid var(--success); 
+      color: #065f46;
+      box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+    }
+    
+    #message.error { 
+      background: rgba(254,226,226,0.9); 
+      border: 1px solid var(--error); 
+      color: #991b1b;
+      box-shadow: 0 4px 12px rgba(239,68,68,0.3);
+    }
+
+    .text-center { text-align: center; }
+    .mt-4 { margin-top: 1.5rem; }
+    .text-sm { font-size: 0.875rem; }
+    
+    .text-link { 
+      color: #FFC107; 
+      text-decoration: none; 
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .text-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #FFC107;
+      transition: width 0.3s ease;
+    }
+
+    .text-link:hover::after { width: 100%; }
+    
+    .text-link:hover { 
+      color: #FFB300;
+    }
+
+    .divider { 
+      display: flex; 
+      align-items: center; 
+      margin: 2rem 0; 
+    }
+    
+    .divider::before, .divider::after { 
+      content: ""; 
+      flex: 1; 
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .divider-text { 
+      padding: 0 1rem; 
+      font-size: 0.75rem; 
+      color: #718096;
+      text-transform: uppercase; 
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .text-muted {
+      color: #718096;
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .card-header { padding: 2rem 1.5rem 1rem; }
+      .card-content { padding: 0 1.5rem 2rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <span class="logo-text">VietTour Guide</span>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Trang chủ</a>
+        <a href="locations.html" class="nav-link">Địa điểm</a>
+        <a href="guides.html" class="nav-link">Hướng dẫn viên</a>
+        <a href="#" class="nav-link">Liên hệ</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <div class="login-container">
+      <div class="card">
+
+        <div class="card-header">
+          <div class="logo-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <h2 class="card-title">Đăng nhập</h2>
+          <p class="card-description">Đăng nhập để trải nghiệm dịch vụ tour tuyệt vời</p>
+        </div>
+
+        <div class="card-content">
+          <form id="loginForm">
+
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" id="email" class="form-input" placeholder="Nhập email của bạn" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Mật khẩu</label>
+              <div class="password-container">
+                <input type="password" id="password" class="form-input" placeholder="Nhập mật khẩu" required>
+                <button type="button" id="togglePassword" class="password-toggle">👁</button>
+              </div>
+            </div>
+
+            <div id="message"></div>
+
+            <button type="submit" id="submitBtn" class="btn">Đăng nhập</button>
+
+          </form>
+
+          <div class="mt-4 text-center">
+            <a href="#" class="text-sm text-link">Quên mật khẩu?</a>
+          </div>
+
+          <div class="divider">
+            <span class="divider-text">Hoặc</span>
+          </div>
+
+          <div class="text-center">
+            <span class="text-sm text-muted">Chưa có tài khoản? </span>
+            <a href="register.html" class="text-sm text-link">Đăng ký ngay</a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Script -->
+  <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const password = document.getElementById('password');
+
+    togglePassword.addEventListener('click', () => {
+      password.type = password.type === "password" ? "text" : "password";
+      togglePassword.textContent = password.type === "password" ? "👁" : "👁‍🗨";
+    });
+
+    const form = document.getElementById('loginForm');
+    const message = document.getElementById('message');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Đang đăng nhập...";
+
+      const payload = {
+        email: email.value,
+        password: password.value
+      };
+
+      try {
+        const res = await fetch("http://localhost:4000/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message);
+
+        message.className = "success";
+        message.style.display = "flex";
+        message.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          Chào mừng ${data.user.name}
+        `;
+
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userRole", data.user.role);
+        localStorage.setItem("userName", data.user.name);
+        localStorage.setItem('userId', data.user._id);
+
+
+        setTimeout(() => {
+          if (data.user.role === "admin") location.href = "admin.html";
+          else if (data.user.role === "guide") location.href = "guide-chat.html";
+          else location.href = "my-bookings.html";
+        }, 800);
+
+      } catch (err) {
+        message.className = "error";
+        message.style.display = "flex";
+        message.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
+          ${err.message}
+        `;
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Đăng nhập";
+      }
+    });
+     (function checkLoginState() {
+      const token = localStorage.getItem('token');
+      const userName = localStorage.getItem('userName');
+      const userRole = localStorage.getItem('userRole');
+
+      console.log('🔐 Checking login state:', { token: token ? 'Found' : 'None', userName, userRole });
+
+      const authDiv = document.querySelector('.auth');
+
+      if (token && userName) {
+        console.log('✅ User logged in:', userName);
+
+        authDiv.innerHTML = `
+        <span style="font-weight: 600; color: var(--text-dark);">Xin chào, ${userName}</span>
+        ${userRole === 'admin' ? `
+          <a href="admin.html" class="btn btn-outline">Admin Panel</a>
+        ` : ''}
+        ${userRole === 'guide' ? `
+          <a href="guide-approve.html" class="btn btn-outline">Tour đã nhận</a>
+        ` : ''}
+        ${userRole === 'customer' ? `
+          <a href="my-bookings.html" class="btn btn-outline">Tour của tôi</a>
+        ` : ''}
+        <button onclick="handleLogout()" class="btn btn-primary">Đăng xuất</button>
+      `;
+      }
+    })();
+
+    function handleLogout() {
+      if (confirm('Bạn có chắc muốn đăng xuất?')) {
+        localStorage.clear();
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
+</body>
+</html>

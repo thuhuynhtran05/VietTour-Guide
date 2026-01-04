@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đặt lịch hướng dẫn viên | VietTour Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #5b69f5;
+      --primary-hover: #4a57d4;
+      --primary-light: #e8eaff;
+      --accent: #fbbf24;
+      --text-dark: #1e293b;
+      --text-medium: #475569;
+      --text-light: #94a3b8;
+      --border: rgba(255,255,255,0.2);
+      --success: #10b981;
+      --error: #ef4444;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url('./4.jpg') center/cover fixed;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg,
+      rgba(30, 58, 138, 0.85),
+      rgba(17, 24, 39, 0.75)
+      );
+      backdrop-filter: blur(8px);
+      z-index: -1;
+    }
+
+    /* ========== HEADER ========== */
+    header {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    /* ✅ Logo mới */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.02);
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: #FFC107;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(255,193,7,0.3);
+    }
+
+    .logo-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: #1a202c;
+      stroke-width: 2.5;
+    }
+
+    .logo-text {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .nav {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: #4b5563;
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      padding: 0.625rem 1.25rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #1f2937;
+      background: #f3f4f6;
+    }
+
+    .nav-link.active {
+      color: #3b82f6;
+      background: #eff6ff;
+    }
+
+    .user-badge {
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border: 1px solid #bae6fd;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #0c4a6e;
+      font-size: 0.875rem;
+    }
+
+    /* ========== MAIN CONTENT ========== */
+    main {
+      padding: 40px 0 80px;
+    }
+
+    .booking-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+      color: white;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      text-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    .page-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      font-weight: 500;
+    }
+
+    /* Info Cards */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .info-card {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 20px;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+    }
+
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, #5b69f5, #7c5cf6);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .card-body {
+      padding: 24px;
+      color: white;
+    }
+
+    .info-item {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .info-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .info-label {
+      font-weight: 600;
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .info-value {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .price-highlight {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-shadow: 0 2px 8px rgba(251,191,36,0.4);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      background: rgba(251,191,36,0.2);
+      border: 1px solid rgba(251,191,36,0.4);
+      color: var(--accent);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Booking Form */
+    .form-container {
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 16px 64px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .form-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #5b69f5, #7c5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-subtitle {
+      color: var(--text-medium);
+      font-size: 0.95rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .required {
+      color: var(--error);
+      font-size: 1.1rem;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(91,105,245,0.1);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Price Summary */
+    .price-summary {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #78350f;
+      padding: 28px 32px;
+      border-radius: 16px;
+      margin: 32px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 8px 32px rgba(251,191,36,0.4);
+    }
+
+    .price-label {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .price-value {
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 32px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #5b69f5, #7c5cf6);
+      color: white;
+      box-shadow: 0 8px 24px rgba(91,105,245,0.4);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(91,105,245,0.5);
+    }
+
+    .btn-primary:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* Alert */
+    .alert {
+      padding: 16px 20px;
+      border-radius: 12px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .alert-success {
+      background: #d1fae5;
+      border: 2px solid var(--success);
+      color: #065f46;
+    }
+
+    .alert-error {
+      background: #fee2e2;
+      border: 2px solid var(--error);
+      color: #991b1b;
+    }
+
+    .alert-warning {
+      background: #fef3c7;
+      border: 2px solid #f59e0b;
+      color: #92400e;
+    }
+
+    /* Loading skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 8px;
+      height: 20px;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .spinner {
+      animation: spin 1s linear infinite;
+      width: 20px;
+      height: 20px;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+      }
+
+      .page-title {
+        font-size: 1.875rem;
+      }
+
+      .form-container {
+        padding: 24px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .price-summary {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <span class="logo-text">VietTour Guide</span>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Trang chủ</a>
+        <a href="locations.html" class="nav-link">Địa điểm</a>
+        <a href="guides.html" class="nav-link">Hướng dẫn viên</a>
+        <a href="my-bookings.html" class="nav-link active">Tour của tôi</a>
+        <div class="user-badge" id="userName">Khách hàng</div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main>
+  <div class="booking-wrapper">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">Đặt lịch hướng dẫn viên</h1>
+      <p class="page-subtitle">Hoàn tất thông tin để xác nhận booking tour của bạn</p>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="info-grid">
+      <!-- Guide Info -->
+      <div class="info-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <h3 class="card-title">Hướng dẫn viên</h3>
+        </div>
+        <div class="card-body" id="guideInfo">
+          <div class="skeleton"></div>
+          <div class="skeleton" style="width: 80%;"></div>
+          <div class="skeleton" style="width: 60%;"></div>
+        </div>
+      </div>
+
+      <!-- Location Info -->
+      <div class="info-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <h3 class="card-title">Địa điểm tour</h3>
+        </div>
+        <div class="card-body" id="locationInfo">
+          <div class="skeleton"></div>
+          <div class="skeleton" style="width: 70%;"></div>
+          <div class="skeleton" style="width: 90%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="form-container">
+      <div class="form-header">
+        <h2 class="form-title">Thông tin đặt lịch</h2>
+        <p class="form-subtitle">Vui lòng điền đầy đủ thông tin để hoàn tất booking</p>
+      </div>
+
+      <form id="bookingForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="date" class="form-label">
+              📅 Ngày xuất phát <span class="required">*</span>
+            </label>
+            <input type="date" id="date" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label for="timeSlot" class="form-label">
+              🕐 Khung giờ <span class="required">*</span>
+            </label>
+            <select id="timeSlot" class="form-select" required>
+              <option value="">-- Chọn khung giờ --</option>
+              <option value="08:00-10:00">🌅 Sáng sớm (08:00 - 10:00)</option>
+              <option value="10:30-12:30">☀️ Buổi sáng (10:30 - 12:30)</option>
+              <option value="13:00-15:00">🌤️ Buổi chiều (13:00 - 15:00)</option>
+              <option value="15:30-17:30">🌆 Chiều tối (15:30 - 17:30)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="guests" class="form-label">
+              👥 Số khách <span class="required">*</span>
+            </label>
+            <input type="number" id="guests" class="form-input" min="1" value="1" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="form-label">
+              📱 Số điện thoại <span class="required">*</span>
+            </label>
+            <input type="tel" id="phone" class="form-input" placeholder="+84 123 456 789" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="notes" class="form-label">
+              📝 Ghi chú đặc biệt
+            </label>
+            <textarea id="notes" class="form-textarea" placeholder="Yêu cầu đặc biệt, nhu cầu ăn uống, di chuyển..."></textarea>
+          </div>
+        </div>
+
+        <!-- Price Summary -->
+        <div class="price-summary">
+          <div class="price-label">💰 Tổng chi phí dự kiến:</div>
+          <div class="price-value" id="totalPrice">
+            <div class="skeleton" style="width: 150px; height: 32px; background: rgba(120,53,15,0.2);"></div>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn btn-primary">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          Xác nhận đặt lịch
+        </button>
+      </form>
+
+      <div id="message"></div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  const API_BASE = 'http://localhost:4000/api';
+  const params = new URLSearchParams(window.location.search);
+  const guideId = params.get('guideId');
+  const locationId = params.get('locationId');
+  const token = localStorage.getItem('token');
+  const userName = localStorage.getItem('userName');
+
+  if (!token) {
+    alert('Vui lòng đăng nhập');
+    window.location.href = 'login.html';
+  }
+
+  if (userName) {
+    document.getElementById('userName').textContent = userName;
+  }
+
+  if (!locationId || !guideId) {
+    alert('Thiếu thông tin tour hoặc hướng dẫn viên');
+    window.location.href = 'locations.html';
+  }
+
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('date').setAttribute('min', today);
+
+  let pricePerPerson = 0;
+  let currentLocation = null;
+  let currentGuide = null;
+
+  function formatVND(amount) {
+    return new Intl.NumberFormat('vi-VN').format(amount) + ' đ';
+  }
+
+  function showMessage(message, type = 'success') {
+    const messageEl = document.getElementById('message');
+    messageEl.className = `alert alert-${type}`;
+    messageEl.textContent = message;
+  }
+
+  function updateTotalPrice() {
+    const guests = parseInt(document.getElementById('guests').value) || 1;
+    const total = guests * pricePerPerson;
+    document.getElementById('totalPrice').textContent = formatVND(total);
+  }
+
+  async function loadLocationData() {
+    const res = await fetch(`${API_BASE}/locations/${locationId}`);
+    if (!res.ok) throw new Error('Không tìm thấy địa điểm');
+
+    const data = await res.json();
+    currentLocation = data.location || data;
+    pricePerPerson = currentLocation.price || 0;
+
+    document.getElementById('locationInfo').innerHTML = `
+        <div class="info-item">
+          <div class="info-label">Địa điểm</div>
+          <div class="info-value">${currentLocation.name}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Danh mục</div>
+          <div class="info-value">${currentLocation.category || 'N/A'}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Giá tour/người</div>
+          <div class="price-highlight">${formatVND(pricePerPerson)}</div>
+        </div>
+      `;
+  }
+
+  async function loadGuideData() {
+    const res = await fetch(`${API_BASE}/guides/${guideId}`);
+    if (!res.ok) throw new Error('Không tìm thấy hướng dẫn viên');
+
+    currentGuide = await res.json();
+
+    const languagesTags = (currentGuide.languages || [])
+            .map(l => `<span class="tag">${l}</span>`)
+            .join('');
+
+    document.getElementById('guideInfo').innerHTML = `
+        <div class="info-item">
+          <div class="info-label">Tên HDV</div>
+          <div class="info-value">${currentGuide.user?.name || 'N/A'}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Email</div>
+          <div class="info-value">${currentGuide.user?.email || 'N/A'}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Ngôn ngữ</div>
+          <div class="tags">${languagesTags || '<span class="tag">Tiếng Việt</span>'}</div>
+        </div>
+      `;
+  }
+
+  async function loadData() {
+    try {
+      await loadLocationData();
+      await loadGuideData();
+      updateTotalPrice();
+    } catch (err) {
+      console.error(err);
+      showMessage(err.message, 'error');
+    }
+  }
+
+  document.getElementById('guests').addEventListener('input', updateTotalPrice);
+
+  document.getElementById('bookingForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const date = document.getElementById('date').value;
+    const timeSlot = document.getElementById('timeSlot').value;
+    const guests = parseInt(document.getElementById('guests').value) || 1;
+    const total = guests * pricePerPerson;
+
+    if (!date || !timeSlot || total <= 0) {
+      showMessage('Vui lòng nhập đầy đủ thông tin', 'warning');
+      return;
+    }
+
+    const query = new URLSearchParams({
+      locationId,
+      guideId,
+      date,
+      timeSlot,
+      guests,
+      total
+    });
+
+    window.location.href = `payment.html?${query.toString()}`;
+  });
+
+  loadData();
+</script>
+</body>
+</html>
